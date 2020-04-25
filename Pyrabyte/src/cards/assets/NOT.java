@@ -23,6 +23,7 @@ import cards.InputCard;
 import cards.Modifier;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import pyrabyte.Board;
 
 /**
  *
@@ -46,14 +47,14 @@ public class NOT extends Card implements Modifier{
     }
 
     @Override
-    public void effect(Card c){
+    public void effect(Card c, Board b){
         if(c instanceof GateCard) ((GateCard) c).output = !((GateCard) c).output;
         else if(c instanceof InputCard) ((InputCard) c).flip();
     }
 
     @Override
     public boolean isTarget(Card c){
-        return /*player == c.player && */(c instanceof GateCard || c instanceof InputCard);
+        return player == c.player && (c instanceof GateCard || c instanceof InputCard);
     }
     
 }

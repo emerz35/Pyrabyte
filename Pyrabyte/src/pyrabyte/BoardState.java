@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Adam
+ * Copyright (C) 2020 Adam Whittaker
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,19 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cards;
+package pyrabyte;
 
-import pyrabyte.Board;
+import java.io.Serializable;
 
 /**
  *
  * @author Adam Whittaker
  */
-public interface Modifier{
+public final class BoardState implements Serializable{
     
-    
-    public void effect(Card c, Board b);
-    
-    public boolean isTarget(Card c);
+
+    private static final long serialVersionUID = 4578768L;
     
 }

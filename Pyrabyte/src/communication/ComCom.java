@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Adam
+ * Copyright (C) 2020 Adam Whittaker
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,19 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cards;
+package communication;
 
-import pyrabyte.Board;
+import java.io.IOException;
 
 /**
  *
  * @author Adam Whittaker
  */
-public interface Modifier{
+public interface ComCom{
+    
+    public void send(Object ob);
+    
+    public void connect(int timeout, String ip, int port) throws IOException;
     
     
-    public void effect(Card c, Board b);
-    
-    public boolean isTarget(Card c);
+    public static ComCom createComInstance(boolean isServer){
+        if(isServer) return new ComServer();
+        else return new ComClient();
+    }
     
 }

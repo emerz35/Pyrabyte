@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.LinkedList;
 import logic.Collision;
+import pyrabyte.Player;
 
 /**
  *
@@ -15,7 +16,7 @@ public abstract class Card extends Collision{
     
     public String name;
     public final LinkedList<Modifier> modifiers = new LinkedList<>();
-    //public Player player;
+    public Player player;
     
     
     public Card(String n, int w, int h){
