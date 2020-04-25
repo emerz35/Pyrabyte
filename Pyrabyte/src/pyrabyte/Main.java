@@ -5,11 +5,17 @@
  */
 package pyrabyte;
 
+import java.util.Random;
+
 /**
  *
  * @author Charlie Hands
  */
 public class Main {
+    
+    
+    public static final Random R = new Random();
+    
 
     /**
      * @param args the command line arguments
