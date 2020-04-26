@@ -8,6 +8,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static communication.ComCom.createComInstance;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import javax.xml.parsers.ParserConfigurationException;
+import org.bitlet.weupnp.GatewayDevice;
+import org.bitlet.weupnp.GatewayDiscover;
+import org.bitlet.weupnp.PortMappingEntry;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -48,19 +56,53 @@ public class Main extends Canvas{
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        Main m = new Main("", 0, true);
+    public static void main(String[] args) throws SocketException, IOException, UnknownHostException, SAXException, ParserConfigurationException, InterruptedException{
+        Main m = new Main("", 0, false);
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter ip...");
+        String ip = scan.nextLine();
+        int port = 27960;  
+        
+        /*GatewayDiscover discover = new GatewayDiscover();
+        
+        discover.discover();
+        GatewayDevice d = discover.getValidGateway();
+        if(d != null){
+            InetAddress localAddress = d.getLocalAddress();
+            //String externalIPAddress = d.getExternalIPAddress();
+            PortMappingEntry portMapping = new PortMappingEntry();
+            if (!d.getSpecificPortMappingEntry(port,"TCP",portMapping)) {
+                System.out.println("Port was already mapped. Aborting test.");    
+            } else {
+                System.out.println("Sending port mapping request");
+                
+                if (!d.addPortMapping(port, port,localAddress.getHostAddress(),"TCP","test")) {
+                    System.out.println("Port mapping attempt failed");
+                    System.out.println("Test FAILED");
+                } else {
+                    
+                    Thread.sleep(1000*5);
+                    d.deletePortMapping(port,"TCP");
+
+                    System.out.println("Port mapping removed");
+                    System.out.println("Test SUCCESSFUL");
+                }
+            }
+                
+        }*/
+        
+        
         
         try{
-            m.com.connect(5000, "84.64.16.213", 27960);
+            m.com.connect(5000, ip, port);
         }catch(IOException e){
             e.printStackTrace(System.err);
         }
         
         System.out.println("Recieving text input...");
-        Scanner scan = new Scanner(System.in);
+        
         while(true){
-            m.com.send(scan.nextLine());
+            m.com.send("Charlie: " + scan.nextLine());
         }
     }
     
