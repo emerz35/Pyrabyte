@@ -30,9 +30,9 @@ public interface ComCom{
     public void connect(int timeout, String ip, int port) throws IOException;
     
     
-    public static ComCom createComInstance(boolean isServer){
-        if(isServer) return new ComServer();
-        else return new ComClient();
+    public static ComCom createComInstance(boolean isServer, int port){
+        if(isServer) return new ComServer(port);
+        else return new ComClient(port);
     }
     
 }

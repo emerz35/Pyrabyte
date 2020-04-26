@@ -30,9 +30,9 @@ public class ComServer implements ComCom{
     private final Server server;
     
     
-    public ComServer(){
+    public ComServer(int port){
         server = new Server();
-        new ComListener().start(server);
+        new ComListener().start(server, port);
     }
 
     @Override

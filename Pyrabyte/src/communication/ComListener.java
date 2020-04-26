@@ -20,6 +20,8 @@ package communication;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
+import com.esotericsoftware.kryonet.Server;
+import java.io.IOException;
 import pyrabyte.BoardState;
 import pyrabyte.Player;
 
@@ -50,11 +52,18 @@ public class ComListener extends Listener{
     }
     
     
-    public void start(EndPoint end){
+    public void start(EndPoint end, int port){
         end.getKryo().register(String.class);
         end.getKryo().register(Player.class);
         end.getKryo().register(BoardState.class);
         end.addListener(this);
+        if(end instanceof Server){
+            try{
+                ((Server) end).bind(port);
+            }catch(IOException e){
+                e.printStackTrace(System.err);
+            }
+        }
         end.start();
     }
     
