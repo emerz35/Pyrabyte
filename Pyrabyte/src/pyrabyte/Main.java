@@ -31,7 +31,7 @@ public class Main extends Canvas{
     Renderer renderer;
     
     public Main(String ip, int port, boolean isServer){
-        com = createComInstance(isServer);
+        com = createComInstance(isServer, port);
         
         window  = new Window("Pyrabyte", WIDTH,HEIGHT, this);
     }
@@ -52,7 +52,7 @@ public class Main extends Canvas{
         Main m = new Main("", 0, true);
         
         try{
-            m.com.connect(5000, "84.64.16.213", 27960);
+            m.com.connect(5000, "94.10.98.123", 27960);
         }catch(IOException e){
             e.printStackTrace(System.err);
         }
