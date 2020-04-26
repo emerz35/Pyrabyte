@@ -30,9 +30,9 @@ public class ComClient implements ComCom{
     private Client client;
     
     
-    public ComClient(){
+    public ComClient(int port){
         client = new Client();
-        new ComListener().start(client);
+        new ComListener().start(client, port);
     }
 
     
