@@ -38,7 +38,7 @@ public class InputCard extends Card{
         right = r;
     }
     
-    public InputCard(int x, int y,int w, int h){
+    public InputCard(int x, int y, int w, int h){
         this(x,y,w, h, R.nextDouble()<0.5, R.nextDouble()<0.5);
     }
 
@@ -47,8 +47,8 @@ public class InputCard extends Card{
     public void paint(Graphics2D g){
         g.setColor(Color.GRAY);
         g.fillRect(x, y, width, height);
-        paintBoolean(g, left, x, y+3*height/2, Color.BLACK, Color.GRAY);
-        paintBoolean(g, right, x+3*width/4, y+3*height/2, Color.BLACK, Color.GRAY);
+        paintBoolean(g, left, x, y+3*height/8, Color.BLACK, Color.GRAY);
+        paintBoolean(g, right, x+3*width/4, y+3*height/8, Color.BLACK, Color.GRAY);
     }
     
     public void flip(){

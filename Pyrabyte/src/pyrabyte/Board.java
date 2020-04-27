@@ -16,7 +16,7 @@ public class Board {
     
     
     public Board(int inputNum){
-        
+        boardState = new BoardState(inputNum);
     }
     
     public void paint(Graphics2D g){

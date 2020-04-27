@@ -22,11 +22,11 @@ import cards.GateCard;
 import cards.InputCard;
 import cards.Placeholder;
 import java.awt.Graphics2D;
-import java.util.List;
 import java.io.Serializable;
 import java.util.LinkedList;
-import static pyrabyte.Main.CARD_HEIGHT;
-import static pyrabyte.Main.CARD_WIDTH;
+import java.util.List;
+
+import static pyrabyte.Main.*;
 
 /**
  *
@@ -48,15 +48,18 @@ public final class BoardState implements Serializable{
         left = new GateCard[inputNum-1][];
         right = new GateCard[inputNum-1][];
         
+        int py = (CARD_HEIGHT + PADDING_Y), px = CARD_WIDTH + PADDING_X;
+        int y = (HEIGHT - (inputNum-1)*py)/2;
+                
         for(int i = 0; i< inputNum;i++){
-            input[i] = new InputCard(CARD_WIDTH, CARD_HEIGHT);
+            input[i] = new InputCard(WIDTH/2, y + i*py, CARD_WIDTH, CARD_HEIGHT);
         }
         for(int i = 0; i< inputNum-1; i++){
             left[i] = new GateCard[inputNum - 1 - i];
             right[i] = new GateCard[inputNum - 1 - i];
-            for(int j = 0; j < inputNum - 1 - i; j++){
-                left[i][j] = new Placeholder(CARD_WIDTH,CARD_HEIGHT);
-                right[i][j] = new Placeholder(CARD_WIDTH,CARD_HEIGHT);
+            for(int j = 0; j < left[i].length; j++){
+                left[i][j] = new Placeholder(WIDTH/2-(i+1)*px, y + (i+1)*py/2 + j*py, CARD_WIDTH,CARD_HEIGHT);
+                right[i][j] = new Placeholder(WIDTH/2+(i+1)*px, y + (i+1)*py/2 + j*py, CARD_WIDTH,CARD_HEIGHT);
             }
         }
     }
@@ -64,13 +67,13 @@ public final class BoardState implements Serializable{
     public void flipInput(GateCard[][] board, boolean isLeft){
         for(int i = 0; i< board[0].length;i++){
             if(!board[0][i].compatible(isLeft? input[i].left:input[i].right,isLeft? input[i+1].left:input[i+1].right))
-                board[0][i] = new Placeholder(CARD_WIDTH,CARD_HEIGHT);
+                board[0][i] = new Placeholder(board[0][i]);
         }
         
         for(int i = 1; i< board.length;i++){
             for(int j = 0; j< board[i].length;j++){
                 if(board[i-1][j] instanceof Placeholder || board[i-1][j+1] instanceof Placeholder)
-                    board[i][j] = new Placeholder(CARD_WIDTH,CARD_HEIGHT);
+                    board[i][j] = new Placeholder(board[i][j]);
             }
         }
     }

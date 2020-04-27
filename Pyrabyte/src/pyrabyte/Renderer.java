@@ -21,6 +21,7 @@ public class Renderer implements Runnable{
     
     private boolean running = true;
     
+    
     public Renderer(Main m){
         main = m;
     }
@@ -48,9 +49,10 @@ public class Renderer implements Runnable{
         if(bs.getDrawGraphics() instanceof Graphics2D){
             Graphics2D g = (Graphics2D) bs.getDrawGraphics();
             
-            g.setColor(Color.WHITE);
+            g.setColor(Color.BLACK);
             g.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
-
+            
+            main.boardUwu.paint(g);
 
             g.dispose();
             bs.show();

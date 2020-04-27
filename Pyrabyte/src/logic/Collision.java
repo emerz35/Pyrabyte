@@ -27,9 +27,16 @@ public abstract class Collision{
     public int x, y, width, height;
     
     
+    /**
+     * Creates a new instance.
+     * @param x The x of the CENTRE of the rectangle.
+     * @param y The y of the CENTRE of the rectangle.
+     * @param w Width
+     * @param h Height
+     */
     public Collision(int x, int y, int w, int h){
-        this.x = x;
-        this.y = y;
+        this.x = x - w/2;
+        this.y = y - h/2;
         width = w;
         height = h;
     }
@@ -59,11 +66,4 @@ public abstract class Collision{
         return eX>x && eX<x+w && eY>y && eY<y+h;
     }
     
-    public static int getXFromMid(int midX, int w){
-        return midX - w/2;
-    }
-    
-    public static int getYFromMid(int midY, int h){
-        return midY - h/2;
-    }
 }

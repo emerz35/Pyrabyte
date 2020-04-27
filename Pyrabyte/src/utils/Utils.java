@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Charlie Hands
+ * Copyright (C) 2020 Adam Whittaker
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,40 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cards;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import logic.Collision;
+package utils;
 
 /**
  *
- * @author Charlie Hands
+ * @author Adam Whittaker
  */
-public class Placeholder extends GateCard{
+public final class Utils{
     
     
-    private final static Color COLOR = new Color(124, 80, 60);
-
+    private Utils(){}
     
-    public Placeholder(int x, int y, int w, int h){
-        super("Placeholder",x,y, w, h,false);
+    
+    public @interface Unfinished{
+        String value() default "";
     }
     
-    public Placeholder(Collision col){
-        this(col.x, col.y, col.width, col.height);
+    public @interface Tested{
+        String value() default "";
     }
-
-    @Override
-    public void paint(Graphics2D g) {
-        g.setColor(COLOR);
-        
-        g.drawRect(x,y,width,height);
-    }
-
-    @Override
-    public boolean compatible(boolean a, boolean b) {
-        return true;
+    
+    public @interface ThreadUsed{
+        String value() default "";
     }
     
 }
