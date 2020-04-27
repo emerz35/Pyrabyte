@@ -113,4 +113,12 @@ public final class BoardState implements Serializable{
             return !(board[y-1][x] instanceof Placeholder || board[y-1][x+1] instanceof Placeholder) 
                     && board[y][x].compatible(isLeft? left[y-1][x].output:right[y-1][x].output, isLeft? left[y-1][x+1].output:right[y-1][x+1].output);
     }
+    
+    public Card clickedOn(int x, int y){
+        for(Card c : input) if(c.withinBounds(x, y)) return c;
+        for(Card[] row : left) for(Card c : row) if(c.withinBounds(x, y)) return c;
+        for(Card[] row : right) for(Card c : row) if(c.withinBounds(x, y)) return c;
+        return null;
+    }
+    
 }
