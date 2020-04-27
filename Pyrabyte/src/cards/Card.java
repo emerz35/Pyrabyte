@@ -20,10 +20,13 @@ public abstract class Card extends Collision{
     
     
     public Card(String n, int w, int h){
-        super(0, 0, w, h);
-        name = n;
+        this(n, 0, 0, w, h);
     }
     
+    public Card(String n, int x, int y, int w, int h){
+        super(x,y,w,h);
+        name = n;
+    }
     
     public abstract void paint(Graphics2D g);
     

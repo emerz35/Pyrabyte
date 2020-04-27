@@ -8,14 +8,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static communication.ComCom.createComInstance;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import javax.xml.parsers.ParserConfigurationException;
-import org.bitlet.weupnp.GatewayDevice;
-import org.bitlet.weupnp.GatewayDiscover;
-import org.bitlet.weupnp.PortMappingEntry;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -26,7 +18,8 @@ public class Main extends Canvas{
     
     public static final Random R = new Random();
     
-    public final static int WIDTH = 1240, HEIGHT = 800;
+    public final static int WIDTH = 1240, HEIGHT = 800, CARD_WIDTH = 128,
+            CARD_HEIGHT = 128, PADDING_X = WIDTH/4, PADDING_Y = HEIGHT/4; 
     /*static{
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         WIDTH = dim.width;
@@ -39,7 +32,7 @@ public class Main extends Canvas{
     Renderer renderer;
     
     public Main(String ip, int port, boolean isServer){
-        com = createComInstance(isServer);
+        com = createComInstance(isServer, port);
         
         window  = new Window("Pyrabyte", WIDTH,HEIGHT, this);
     }
@@ -56,7 +49,7 @@ public class Main extends Canvas{
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SocketException, IOException, UnknownHostException, SAXException, ParserConfigurationException, InterruptedException{
+    public static void main(String[] args) {
         Main m = new Main("", 0, false);
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter ip...");

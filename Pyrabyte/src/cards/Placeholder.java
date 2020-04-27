@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Adam
+ * Copyright (C) 2020 Charlie Hands
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,44 +14,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package cards;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import static pyrabyte.Main.R;
-
 /**
  *
- * @author Adam Whittaker
+ * @author Charlie Hands
  */
-public abstract class GateCard extends Card{
-    
-    
-    public boolean output;
-    
+public class Placeholder extends GateCard{
 
-    public GateCard(String n, int w, int h, boolean out){
-        super(n, w, h);
+    public Placeholder(int x, int y, int w, int h) {
+        super("Placeholder",x,y, w, h,false);
+        
     }
-    
-    public GateCard(String n, int x, int y, int w, int h, boolean out){
-        super(n,x,y, w, h);
+
+    @Override
+    public void paint(Graphics2D g) {
+        g.setColor(Color.BLACK);
+        
+        g.drawRect(x,y,width,height);
     }
-    
-    public GateCard(String n, int w, int h){
-        this(n, w, h, R.nextDouble()<0.5);
-    }
-    
-    
-    public abstract boolean compatible(boolean a, boolean b);
-    
-    
-    public void defaultPaint(Graphics2D g, Color col){
-        g.setColor(col);
-        g.fillRect(x, y, width, height);
-        paintBoolean(g, output, x+3*width/8, y+3*height/8, col.darker(), col);
+
+    @Override
+    public boolean compatible(boolean a, boolean b) {
+        return true;
     }
     
 }

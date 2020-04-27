@@ -1,19 +1,25 @@
 
 package pyrabyte;
 
-import java.awt.List;
-import java.util.LinkedList;
+import java.awt.Graphics2D;
+
+
 
 /**
  *
  * @author Charlie Hands
  */
 public class Board {
-    //List<Card> otherCards = new LinkedList<Card>();
+    public BoardState boardState;
     
-    //Card board[][];
+    public Player local, opponent;
+    
     
     public Board(int inputNum){
         
+    }
+    
+    public void paint(Graphics2D g){
+        boardState.paint(g);
     }
 }

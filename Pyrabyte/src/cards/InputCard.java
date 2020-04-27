@@ -32,14 +32,14 @@ public class InputCard extends Card{
     public boolean left, right;
     
 
-    public InputCard(int w, int h, boolean l, boolean r){
-        super("Base", w, h);
+    public InputCard(int x, int y, int w, int h, boolean l, boolean r){
+        super( "Base",x,y, w, h);
         left = l;
         right = r;
     }
     
-    public InputCard(int w, int h){
-        this(w, h, R.nextDouble()<0.5, R.nextDouble()<0.5);
+    public InputCard(int x, int y,int w, int h){
+        this(x,y,w, h, R.nextDouble()<0.5, R.nextDouble()<0.5);
     }
 
     

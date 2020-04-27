@@ -59,4 +59,11 @@ public abstract class Collision{
         return eX>x && eX<x+w && eY>y && eY<y+h;
     }
     
+    public static int getXFromMid(int midX, int w){
+        return midX - w/2;
+    }
+    
+    public static int getYFromMid(int midY, int h){
+        return midY - h/2;
+    }
 }
