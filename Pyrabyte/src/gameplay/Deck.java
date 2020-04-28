@@ -23,6 +23,7 @@ import cards.assets.OR;
 import cards.assets.XOR;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 import logic.Collision;
@@ -34,7 +35,7 @@ import static gui.Main.*;
  *
  * @author Charlie Hands
  */
-public class Deck extends Collision{
+public class Deck extends Collision implements Serializable{
 
     
     /**

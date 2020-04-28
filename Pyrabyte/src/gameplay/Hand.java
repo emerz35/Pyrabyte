@@ -18,6 +18,7 @@ package gameplay;
 
 import cards.Card;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import static gui.Main.*;
  *
  * @author Charlie Hands
  */
-public class Hand {
+public class Hand implements Serializable{
     
     public final List<Card> list = new LinkedList<>();
     

@@ -17,14 +17,21 @@
 
 package communication;
 
+import cards.Card;
+import cards.GateCard;
+import cards.InputCard;
+import cards.Placeholder;
+import cards.assets.AND;
+import cards.assets.NOT;
+import cards.assets.OR;
+import cards.assets.XOR;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-import gameplay.Board;
-import gameplay.BoardState;
-import gameplay.Player;
+import gameplay.*;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import static gui.Window.MAIN;
 
@@ -58,6 +65,7 @@ public class ComListener extends Listener{
         ctc.sendTCP("The other player has connected!");
         MAIN.com.send(MAIN.localPlayer);
         MAIN.start();
+
     }
 
     @Override
@@ -70,6 +78,17 @@ public class ComListener extends Listener{
         end.getKryo().register(String.class);
         end.getKryo().register(Player.class);
         end.getKryo().register(BoardState.class);
+        end.getKryo().register(Hand.class);
+        end.getKryo().register(Deck.class);
+        end.getKryo().register(Card.class);
+        end.getKryo().register(GateCard.class);
+        end.getKryo().register(InputCard.class);
+        end.getKryo().register(OR.class);
+        end.getKryo().register(XOR.class);
+        end.getKryo().register(NOT.class);
+        end.getKryo().register(AND.class);
+        end.getKryo().register(Placeholder.class);
+        end.getKryo().register(LinkedList.class);
         end.addListener(this);
         if(end instanceof Server){
             try{

@@ -17,11 +17,13 @@
 
 package logic;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Adam
  */
-public abstract class Collision{
+public abstract class Collision implements Serializable{
     
     
     public int x, y, width, height;
