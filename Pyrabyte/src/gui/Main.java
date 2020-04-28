@@ -63,12 +63,12 @@ public class Main extends Canvas{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Main m = new Main("", 0, true);
+        int port = 27960;
+        Main m = new Main("", port, true);
         
         Scanner scan = new Scanner(System.in);
         //System.out.println("Enter ip uwu:");
         String ip = /*scan.nextLine()*/"94.10.98.123";
-        int port = 27960;
         
         try{
             m.com.connect(5000, ip, port);
