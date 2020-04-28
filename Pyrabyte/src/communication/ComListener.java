@@ -32,8 +32,6 @@ import java.util.LinkedList;
 
 import static gui.Window.MAIN;
 
-import static gui.Window.MAIN;
-
 /**
  *
  * @author Adam Whittaker

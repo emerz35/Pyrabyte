@@ -76,10 +76,6 @@ public class Main extends Canvas{
 
         //System.out.println("Enter ip uwu:");
         try{
-
-            m.com.connect(5000, "84.64.16.213", port);
-            
-
             m.com.connect(5000, ip, port);
 
         }catch(IOException e){
