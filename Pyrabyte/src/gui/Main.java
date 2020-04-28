@@ -63,20 +63,29 @@ public class Main extends Canvas{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
         int port = 27960;
         Main m = new Main("", port, false);
+
         
         Scanner scan = new Scanner(System.in);
+
         System.out.println("Enter ip uwu:");
         String ip = scan.nextLine();
         
-        
+
+        //System.out.println("Enter ip uwu:");
         try{
+
             m.com.connect(5000, "84.64.16.213", port);
             
+
+            m.com.connect(5000, ip, port);
+
         }catch(IOException e){
             e.printStackTrace(System.err);
         }
+        
         
         System.out.println("Recieving text input...");
         

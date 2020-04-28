@@ -27,9 +27,10 @@ import gameplay.BoardState;
 import gameplay.Deck;
 import gameplay.Hand;
 import gameplay.Player;
-import static gui.Window.MAIN;
 import java.io.IOException;
 import java.util.LinkedList;
+
+import static gui.Window.MAIN;
 
 /**
  *
@@ -61,7 +62,7 @@ public class ComListener extends Listener{
         ctc.sendTCP("The other player has connected!");
         MAIN.com.send(MAIN.localPlayer);
         MAIN.start();
-        
+
     }
 
     @Override
