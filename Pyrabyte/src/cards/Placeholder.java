@@ -30,14 +30,15 @@ public class Placeholder extends GateCard{
     private final static Color COLOR = new Color(124, 80, 60);
 
     
-    public Placeholder(int x, int y, int w, int h, int bx, int by){
+    public Placeholder(int x, int y, int w, int h, int bx, int by, boolean isLeft){
         super("Placeholder",x,y, w, h,false);
         boardX = bx;
         boardY = by;
+        this.isLeft = isLeft;
     }
     
-    public Placeholder(Collision col, int bx, int by){
-        this(col.x, col.y, col.width, col.height, bx, by);
+    public Placeholder(Collision col, int bx, int by, boolean isLeft){
+        this(col.x+col.width/2, col.y+col.height/2, col.width, col.height, bx, by, isLeft);
     }
 
     @Override

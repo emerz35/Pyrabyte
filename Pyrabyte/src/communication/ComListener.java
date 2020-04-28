@@ -21,9 +21,10 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-import java.io.IOException;
+import gameplay.Board;
 import gameplay.BoardState;
 import gameplay.Player;
+import java.io.IOException;
 
 /**
  *
@@ -31,13 +32,22 @@ import gameplay.Player;
  */
 public class ComListener extends Listener{
     
+    
+    private final Board board;
+    
+    
+    public ComListener(Board b){
+        board = b;
+    }
+    
+    
     @Override
     public void received(Connection ctc, Object ob){
         if(ob instanceof String) System.out.println(ob);
         else if(ob instanceof Player){
-        
+            board.opponent = ((Player) ob);
         }else if(ob instanceof BoardState){
-            
+            board.boardState = ((BoardState) ob);
         }
     }
 

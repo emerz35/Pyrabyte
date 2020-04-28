@@ -39,4 +39,8 @@ public final class Utils{
         String value() default "";
     }
     
+    public @interface Remote{
+        String value() default "";
+    }
+    
 }

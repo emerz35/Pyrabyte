@@ -18,15 +18,17 @@ package gameplay;
 
 import cards.Card;
 import cards.assets.AND;
-import static gui.Main.CARD_HEIGHT;
-import static gui.Main.CARD_WIDTH;
-import static gui.Main.R;
+import cards.assets.NOT;
+import cards.assets.OR;
+import cards.assets.XOR;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import logic.Collision;
+import utils.Distribution;
+
+import static gui.Main.*;
 
 /**
  *
@@ -34,30 +36,57 @@ import logic.Collision;
  */
 public class Deck extends Collision{
 
-    public List<Card> cards = new LinkedList<>();
     
+    /**
+     * 0: AND
+     * 1: NOT
+     * 2: OR
+     * 3: XOR
+     */
+    private static final Distribution<Integer> DISTRIBUTION = new Distribution<>(new Integer[]{0,1,2,3,4}, new double[]{4, 2, 5, 3});
+    
+    public LinkedList<Card> cards = new LinkedList<>();
+    
+    
+    /**
+     * Empty Deck.
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
     public Deck(int x, int y, int w, int h) {
         super(x, y, w, h);
     }
     
-    public Deck(int x, int y, int w, int h, int cardNum, Player local){
+    public Deck(int x, int y, int w, int h, int cardNum){
         this(x,y,w,h);
         
         Card temp;
         for(int i = 0; i < cardNum; i++){
-            temp = new AND(CARD_WIDTH,CARD_HEIGHT);
-            temp.player = local;
+            switch(DISTRIBUTION.next()){
+                case 0: temp = new AND(CARD_WIDTH, CARD_HEIGHT); 
+                    break;
+                case 1: temp = new NOT(CARD_WIDTH, CARD_HEIGHT); 
+                    break;
+                case 2: temp = new OR(CARD_WIDTH, CARD_HEIGHT); 
+                    break;
+                default: temp = new XOR(CARD_WIDTH, CARD_HEIGHT); 
+                    break;
+            }
             cards.add(temp);
         }
     }
 
+    
     public void paint(Graphics2D g){
-        g.setColor(Color.white);
+        g.setColor(Color.WHITE);
         
-        g.fillRect(x, y, width, height);
+        if(!cards.isEmpty()) g.fillRect(x, y, width, height);
     }
     
     public void shuffle(){
         Collections.shuffle(cards, R);
     }
+    
 }

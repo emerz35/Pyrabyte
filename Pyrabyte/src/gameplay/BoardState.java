@@ -43,6 +43,7 @@ public final class BoardState implements Serializable{
             
     public InputCard input[];
    
+    
     public BoardState(int inputNum){
         input = new InputCard[inputNum];
         left = new GateCard[inputNum-1][];
@@ -58,22 +59,23 @@ public final class BoardState implements Serializable{
             left[i] = new GateCard[inputNum - 1 - i];
             right[i] = new GateCard[inputNum - 1 - i];
             for(int j = 0; j < left[i].length; j++){
-                left[i][j] = new Placeholder(WIDTH/2-(i+1)*px, y + (i+1)*py/2 + j*py, CARD_WIDTH,CARD_HEIGHT,j,i);
-                right[i][j] = new Placeholder(WIDTH/2+(i+1)*px, y + (i+1)*py/2 + j*py, CARD_WIDTH,CARD_HEIGHT,j,i);
+                left[i][j] = new Placeholder(WIDTH/2-(i+1)*px, y + (i+1)*py/2 + j*py, CARD_WIDTH,CARD_HEIGHT,j,i, true);
+                right[i][j] = new Placeholder(WIDTH/2+(i+1)*px, y + (i+1)*py/2 + j*py, CARD_WIDTH,CARD_HEIGHT,j,i, false);
             }
         }
     }
     
-    public void flipInput(GateCard[][] board, boolean isLeft){
+    
+    public void flipInput(GateCard[][] board, boolean boardIsLeft){
         for(int i = 0; i< board[0].length;i++){
-            if(!board[0][i].compatible(isLeft? input[i].left:input[i].right,isLeft? input[i+1].left:input[i+1].right))
-                board[0][i] = new Placeholder(board[0][i],i,0);
+            if(!board[0][i].compatible(boardIsLeft? input[i].left:input[i].right,boardIsLeft? input[i+1].left:input[i+1].right))
+                board[0][i] = new Placeholder(board[0][i],i,0, board[0][i].isLeft);
         }
         
         for(int i = 1; i< board.length;i++){
             for(int j = 0; j< board[i].length;j++){
                 if(board[i-1][j] instanceof Placeholder || board[i-1][j+1] instanceof Placeholder)
-                    board[i][j] = new Placeholder(board[i][j],j,i);
+                    board[i][j] = new Placeholder(board[i][j], j,i, board[j][i].isLeft);
             }
         }
     }
@@ -96,10 +98,10 @@ public final class BoardState implements Serializable{
         }
     }
     
-    public boolean addCard(boolean isLeft, GateCard card, GateCard toReplace){
-        GateCard[][] board = isLeft? left:right;
+    public boolean addGateCard(boolean playerIsLeft, GateCard card, GateCard toReplace){
+        GateCard[][] board = toReplace.isLeft? left:right;
         
-        if(checkCompatibility(board, isLeft,toReplace.boardX,toReplace.boardY,card)){
+        if(checkCompatibility(board, toReplace.isLeft, playerIsLeft, toReplace.boardX, toReplace.boardY, card)){
             card.x = toReplace.x;
             card.y = toReplace.y;
         
@@ -107,16 +109,21 @@ public final class BoardState implements Serializable{
             
             card.boardX = toReplace.boardX;
             card.boardY = toReplace.boardY;
+            
+            card.isLeft = toReplace.isLeft;
             return true;
         }
         else return false;
     }
     
-    public boolean checkCompatibility(GateCard[][] board, boolean isLeft, int x, int y, GateCard card){
-        if(y == 0) return board[y][x].compatible(isLeft? input[x].left:input[x].right,isLeft? input[x+1].left:input[x+1].right);
-        else 
+    public boolean checkCompatibility(GateCard[][] board, boolean boardIsLeft, boolean playerIsLeft, int x, int y, GateCard card){
+        if(playerIsLeft != boardIsLeft) return false;
+        else if(y == 0){
+            return card.compatible(boardIsLeft? input[x].left:input[x].right,boardIsLeft? input[x+1].left:input[x+1].right);
+        }else{
             return !(board[y-1][x] instanceof Placeholder || board[y-1][x+1] instanceof Placeholder) 
-                    && board[y][x].compatible(isLeft? left[y-1][x].output:right[y-1][x].output, isLeft? left[y-1][x+1].output:right[y-1][x+1].output);
+                    && card.compatible(boardIsLeft? left[y-1][x].output:right[y-1][x].output, boardIsLeft? left[y-1][x+1].output:right[y-1][x+1].output);
+        }
     }
     
     public Card clickedOn(int x, int y){

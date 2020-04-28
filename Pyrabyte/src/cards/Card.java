@@ -1,11 +1,11 @@
 
 package cards;
 
+import gameplay.Player;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.LinkedList;
 import logic.Collision;
-import gameplay.Player;
 
 /**
  *
@@ -17,6 +17,7 @@ public abstract class Card extends Collision{
     public String name;
     public final LinkedList<Modifier> modifiers = new LinkedList<>();
     public Player player;
+    public boolean isLeft;
     
     
     public Card(String n, int w, int h){
@@ -37,6 +38,11 @@ public abstract class Card extends Collision{
             g.setColor(background);
             g.fillRect(tx+width/16, ty+height/16, width/8, height/8);
         }
+    }
+    
+    public void paintFaceDown(Graphics2D g){
+        g.setColor(Color.WHITE);
+        g.fillRect(x, y, width, height);
     }
     
 }

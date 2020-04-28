@@ -18,6 +18,7 @@ public class Renderer implements Runnable{
     private Main main;
     
     private final int fps = 60;
+    private final long milliDelay = 1000/fps;
     
     private boolean running = true;
     
@@ -30,15 +31,10 @@ public class Renderer implements Runnable{
     @Override
     public void run() {
         long time = System.currentTimeMillis();
-        int frames = 0;
         
         while(running){
-            if(frames <= 60){
+            if(System.currentTimeMillis() - time >=milliDelay){
                 paint();
-                frames++;
-            }
-            if(System.currentTimeMillis() - time >=1000){
-                frames = 0;
                 time = System.currentTimeMillis();
             }
         }

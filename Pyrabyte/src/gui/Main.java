@@ -1,13 +1,15 @@
 
 package gui;
 
-import gameplay.Board;
 import communication.ComCom;
+import gameplay.Board;
+import gameplay.Player;
 import java.awt.Canvas;
+import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 
 import static communication.ComCom.createComInstance;
-import gameplay.Player;
 
 /**
  *
@@ -26,31 +28,32 @@ public class Main extends Canvas{
         HEIGHT = dim.height;
     }*/
     
-    ComCom com;
-    Window window;
-    Thread renderThread;
-    Renderer renderer;
-    Board boardUwu;
-    Player localPlayer;
+    public final ComCom com;
+    protected final Window window;
+    private final Thread renderThread;
+    private final Renderer renderer;
+    protected final Board boardUwu;
+    protected final Player localPlayer;
     
     public Main(String ip, int port, boolean isServer){
-        com = createComInstance(isServer, port);
         
         localPlayer = new Player(isServer);
         
         boardUwu = new Board(5, localPlayer);
         
+        com = createComInstance(boardUwu, isServer, port);
+        
         this.addMouseListener(boardUwu);
         this.addMouseMotionListener(boardUwu);
         
-        window  = new Window("Pyrabyte", WIDTH,HEIGHT, this);
+        renderer = new Renderer(this);
+        renderThread = new Thread(renderer);
         
+        window  = new Window("Pyrabyte", WIDTH,HEIGHT, this);
     }
     
     public void start(){
         createBufferStrategy(4);
-        renderer = new Renderer(this);
-        renderThread = new Thread(renderer);
         renderThread.setDaemon(true);
         renderThread.start();
     }
@@ -61,15 +64,15 @@ public class Main extends Canvas{
      */
     public static void main(String[] args) {
         Main m = new Main("", 0, false);
-        /*Scanner scan = new Scanner(System.in);
-        System.out.println("Enter ip...");
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter ip uwu:");
         String ip = scan.nextLine();
         int port = 27960;
         
-        
-        
         try{
             m.com.connect(5000, ip, port);
+            m.com.send(m.localPlayer);
         }catch(IOException e){
             e.printStackTrace(System.err);
         }
@@ -77,8 +80,8 @@ public class Main extends Canvas{
         System.out.println("Recieving text input...");
         
         while(true){
-            m.com.send("Charlie: " + scan.nextLine());
-        }*/
+            m.com.send(scan.nextLine());
+        }
     }
     
 }

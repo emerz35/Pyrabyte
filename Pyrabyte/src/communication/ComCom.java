@@ -17,6 +17,7 @@
 
 package communication;
 
+import gameplay.Board;
 import java.io.IOException;
 
 /**
@@ -30,9 +31,9 @@ public interface ComCom{
     public void connect(int timeout, String ip, int port) throws IOException;
     
     
-    public static ComCom createComInstance(boolean isServer, int port){
-        if(isServer) return new ComServer(port);
-        else return new ComClient(port);
+    public static ComCom createComInstance(Board b, boolean isServer, int port){
+        if(isServer) return new ComServer(port, b);
+        else return new ComClient(port, b);
     }
     
 }

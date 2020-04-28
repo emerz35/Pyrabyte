@@ -21,9 +21,9 @@ import cards.Card;
 import cards.GateCard;
 import cards.InputCard;
 import cards.Modifier;
+import gameplay.Board;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import gameplay.Board;
 
 /**
  *
@@ -32,8 +32,8 @@ import gameplay.Board;
 public class NOT extends Card implements Modifier{
 
 
-    public NOT(String n, int w, int h){
-        super(n, w, h);
+    public NOT(int w, int h){
+        super("NOT", w, h);
     }
     
 

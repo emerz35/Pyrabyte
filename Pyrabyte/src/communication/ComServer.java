@@ -18,6 +18,7 @@
 package communication;
 
 import com.esotericsoftware.kryonet.Server;
+import gameplay.Board;
 import java.io.IOException;
 
 /**
@@ -30,9 +31,9 @@ public class ComServer implements ComCom{
     private final Server server;
     
     
-    public ComServer(int port){
+    public ComServer(int port, Board b){
         server = new Server();
-        new ComListener().start(server, port);
+        new ComListener(b).start(server, port);
     }
 
     @Override

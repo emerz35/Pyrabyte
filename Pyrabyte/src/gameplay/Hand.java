@@ -17,25 +17,23 @@
 package gameplay;
 
 import cards.Card;
-import static gui.Main.CARD_HEIGHT;
-import static gui.Main.CARD_WIDTH;
-import static gui.Main.HEIGHT;
-import static gui.Main.PADDING_X;
-import static gui.Main.PADDING_Y;
-import static gui.Main.WIDTH;
 import java.awt.Graphics2D;
 import java.util.LinkedList;
 import java.util.List;
+
+import static gui.Main.*;
 
 /**
  *
  * @author Charlie Hands
  */
 public class Hand {
+    
     public final List<Card> list = new LinkedList<>();
     
-    public void paint(Graphics2D g){
-        list.forEach(x->x.paint(g));
+    public void paint(Graphics2D g, boolean faceUp){
+        if(faceUp) list.forEach(x->x.paint(g));
+        else list.forEach(x->x.paintFaceDown(g));
     }
     
     public void addCard(Card card){
@@ -47,16 +45,14 @@ public class Hand {
         int px = CARD_WIDTH + PADDING_X;
         int x = (WIDTH - (list.size()-1)*px)/2;
         for(int i = 0; i< list.size();i++){
-            list.get(i).y = HEIGHT - PADDING_Y - CARD_HEIGHT;
-            list.get(i).x = x + i*px;
+            list.get(i).y = HEIGHT - (PADDING_Y + CARD_HEIGHT)*2;
+            list.get(i).x = x + i*px - CARD_WIDTH/2;
         }
     }
     
     public void dragCard(Card card, int x, int y){
         card.x = x;
         card.y = y;
-        
-        
     }
      
 }

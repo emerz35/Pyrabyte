@@ -36,10 +36,12 @@ public abstract class GateCard extends Card{
 
     public GateCard(String n, int w, int h, boolean out){
         super(n, w, h);
+        output = out;
     }
     
     public GateCard(String n, int x, int y, int w, int h, boolean out){
         super(n,x,y, w, h);
+        output = out;
     }
     
     public GateCard(String n, int w, int h){
