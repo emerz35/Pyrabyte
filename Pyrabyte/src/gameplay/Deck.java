@@ -23,13 +23,13 @@ import cards.assets.OR;
 import cards.assets.XOR;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 import logic.Collision;
 import utils.Distribution;
 
 import static gui.Main.*;
-import java.io.Serializable;
 
 /**
  *

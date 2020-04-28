@@ -18,6 +18,13 @@
 package communication;
 
 import cards.Card;
+import cards.GateCard;
+import cards.InputCard;
+import cards.Placeholder;
+import cards.assets.AND;
+import cards.assets.NOT;
+import cards.assets.OR;
+import cards.assets.XOR;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
@@ -78,6 +85,13 @@ public class ComListener extends Listener{
         end.getKryo().register(Hand.class);
         end.getKryo().register(Deck.class);
         end.getKryo().register(Card.class);
+        end.getKryo().register(GateCard.class);
+        end.getKryo().register(InputCard.class);
+        end.getKryo().register(OR.class);
+        end.getKryo().register(XOR.class);
+        end.getKryo().register(NOT.class);
+        end.getKryo().register(AND.class);
+        end.getKryo().register(Placeholder.class);
         end.getKryo().register(LinkedList.class);
         end.addListener(this);
         if(end instanceof Server){

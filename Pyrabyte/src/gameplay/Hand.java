@@ -18,11 +18,11 @@ package gameplay;
 
 import cards.Card;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 import static gui.Main.*;
-import java.io.Serializable;
 
 /**
  *

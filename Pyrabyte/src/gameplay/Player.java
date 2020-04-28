@@ -28,6 +28,10 @@ public final class Player implements Serializable{
     public final boolean isLeft;
     
     
+    public Player(){
+        this(true);
+    }
+    
     public Player(boolean isLeft){
         this.isLeft = isLeft;
         hand = new Hand();
