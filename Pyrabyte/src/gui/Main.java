@@ -1,11 +1,13 @@
 
-package pyrabyte;
+package gui;
 
+import gameplay.Board;
 import communication.ComCom;
 import java.awt.Canvas;
 import java.util.Random;
 
 import static communication.ComCom.createComInstance;
+import gameplay.Player;
 
 /**
  *
@@ -29,12 +31,20 @@ public class Main extends Canvas{
     Thread renderThread;
     Renderer renderer;
     Board boardUwu;
+    Player localPlayer;
     
     public Main(String ip, int port, boolean isServer){
         com = createComInstance(isServer, port);
-        boardUwu = new Board(5);
+        
+        localPlayer = new Player(isServer);
+        
+        boardUwu = new Board(5, localPlayer);
+        
+        this.addMouseListener(boardUwu);
+        this.addMouseMotionListener(boardUwu);
         
         window  = new Window("Pyrabyte", WIDTH,HEIGHT, this);
+        
     }
     
     public void start(){

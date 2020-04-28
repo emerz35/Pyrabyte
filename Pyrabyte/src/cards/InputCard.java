@@ -20,7 +20,7 @@ package cards;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import static pyrabyte.Main.R;
+import static gui.Main.R;
 
 /**
  *

@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.LinkedList;
 import logic.Collision;
-import pyrabyte.Player;
+import gameplay.Player;
 
 /**
  *

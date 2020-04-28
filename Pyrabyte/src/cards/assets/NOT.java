@@ -23,7 +23,7 @@ import cards.InputCard;
 import cards.Modifier;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import pyrabyte.Board;
+import gameplay.Board;
 
 /**
  *

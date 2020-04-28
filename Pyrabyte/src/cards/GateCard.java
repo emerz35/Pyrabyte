@@ -20,7 +20,7 @@ package cards;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import static pyrabyte.Main.R;
+import static gui.Main.R;
 
 /**
  *
@@ -30,6 +30,8 @@ public abstract class GateCard extends Card{
     
     
     public boolean output;
+    
+    public int boardX = -1, boardY = -1;
     
 
     public GateCard(String n, int w, int h, boolean out){

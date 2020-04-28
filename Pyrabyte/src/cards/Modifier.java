@@ -17,7 +17,7 @@
 
 package cards;
 
-import pyrabyte.Board;
+import gameplay.Board;
 
 /**
  *

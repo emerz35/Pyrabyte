@@ -22,8 +22,8 @@ import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import java.io.IOException;
-import pyrabyte.BoardState;
-import pyrabyte.Player;
+import gameplay.BoardState;
+import gameplay.Player;
 
 /**
  *
