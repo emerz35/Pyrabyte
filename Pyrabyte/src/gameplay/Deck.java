@@ -45,6 +45,7 @@ public class Deck extends Collision implements Serializable{
      * 3: XOR
      */
     private static final Distribution<Integer> DISTRIBUTION = new Distribution<>(new Integer[]{0,1,2,3,4}, new double[]{4, 2, 5, 3});
+    private static final long serialVersionUID = 63718246827934L;
     
     public LinkedList<Card> cards = new LinkedList<>();
     

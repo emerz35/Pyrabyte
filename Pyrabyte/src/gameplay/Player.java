@@ -1,4 +1,4 @@
-
+;
 package gameplay;
 
 import java.awt.Graphics2D;
@@ -22,8 +22,8 @@ public final class Player implements Serializable{
         REFLECTION.concatenate(AffineTransform.getTranslateInstance(0, HEIGHT/2));
     }
     
-    Deck deck;
-    Hand hand;
+    public final Deck deck;
+    public final Hand hand;
     
     public final boolean isLeft;
     

@@ -18,12 +18,13 @@
 package cards;
 
 import gameplay.Board;
+import java.io.Serializable;
 
 /**
  *
  * @author Adam Whittaker
  */
-public interface Modifier{
+public interface Modifier extends Serializable{
     
     
     public void effect(Card c, Board b);

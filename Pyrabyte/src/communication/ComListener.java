@@ -25,6 +25,7 @@ import cards.assets.AND;
 import cards.assets.NOT;
 import cards.assets.OR;
 import cards.assets.XOR;
+import com.esotericsoftware.kryo.serializers.JavaSerializer;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
@@ -75,20 +76,21 @@ public class ComListener extends Listener{
     
     
     public void start(EndPoint end, int port){
-        end.getKryo().register(String.class);
-        end.getKryo().register(Player.class);
-        end.getKryo().register(BoardState.class);
-        end.getKryo().register(Hand.class);
-        end.getKryo().register(Deck.class);
-        end.getKryo().register(Card.class);
-        end.getKryo().register(GateCard.class);
-        end.getKryo().register(InputCard.class);
-        end.getKryo().register(OR.class);
-        end.getKryo().register(XOR.class);
-        end.getKryo().register(NOT.class);
-        end.getKryo().register(AND.class);
-        end.getKryo().register(Placeholder.class);
-        end.getKryo().register(LinkedList.class);
+        JavaSerializer serial = new JavaSerializer();
+        end.getKryo().register(String.class, serial);
+        end.getKryo().register(Player.class, serial);
+        end.getKryo().register(BoardState.class, serial);
+        end.getKryo().register(Hand.class, serial);
+        end.getKryo().register(Deck.class, serial);
+        end.getKryo().register(Card.class, serial);
+        end.getKryo().register(GateCard.class, serial);
+        end.getKryo().register(InputCard.class, serial);
+        end.getKryo().register(OR.class, serial);
+        end.getKryo().register(XOR.class, serial);
+        end.getKryo().register(NOT.class, serial);
+        end.getKryo().register(AND.class, serial);
+        end.getKryo().register(Placeholder.class, serial);
+        end.getKryo().register(LinkedList.class, serial);
         end.addListener(this);
         if(end instanceof Server){
             try{
