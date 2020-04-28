@@ -26,6 +26,8 @@ import gameplay.BoardState;
 import gameplay.Player;
 import java.io.IOException;
 
+import static gui.Window.MAIN;
+
 /**
  *
  * @author Adam Whittaker
@@ -54,6 +56,8 @@ public class ComListener extends Listener{
     @Override
     public void connected(Connection ctc){
         ctc.sendTCP("The other player has connected!");
+        MAIN.com.send(MAIN.localPlayer);
+        MAIN.start();
     }
 
     @Override

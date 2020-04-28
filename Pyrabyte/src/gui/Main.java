@@ -33,7 +33,7 @@ public class Main extends Canvas{
     private final Thread renderThread;
     private final Renderer renderer;
     protected final Board boardUwu;
-    protected final Player localPlayer;
+    public final Player localPlayer;
     
     public Main(String ip, int port, boolean isServer){
         
@@ -63,19 +63,19 @@ public class Main extends Canvas{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Main m = new Main("", 0, false);
+        Main m = new Main("", 0, true);
         
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter ip uwu:");
-        String ip = scan.nextLine();
+        //System.out.println("Enter ip uwu:");
+        String ip = /*scan.nextLine()*/"94.10.98.123";
         int port = 27960;
         
         try{
             m.com.connect(5000, ip, port);
-            m.com.send(m.localPlayer);
         }catch(IOException e){
             e.printStackTrace(System.err);
         }
+        
         
         System.out.println("Recieving text input...");
         

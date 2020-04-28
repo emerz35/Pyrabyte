@@ -41,8 +41,10 @@ public class Board extends MouseAdapter{
     
     @Override
     public void mouseClicked​(MouseEvent e){
-        if(local.deck.withinBounds(e.getX(), e.getY()))
+        if(local.deck.withinBounds(e.getX(), e.getY())){
             local.getCardToHand();
+            MAIN.com.send(local);
+        }
     }
     
     @Override
