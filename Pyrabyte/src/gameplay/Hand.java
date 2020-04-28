@@ -22,12 +22,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static gui.Main.*;
+import java.io.Serializable;
 
 /**
  *
  * @author Charlie Hands
  */
-public class Hand {
+public class Hand implements Serializable{
     
     public final List<Card> list = new LinkedList<>();
     

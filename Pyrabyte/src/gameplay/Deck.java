@@ -29,12 +29,13 @@ import logic.Collision;
 import utils.Distribution;
 
 import static gui.Main.*;
+import java.io.Serializable;
 
 /**
  *
  * @author Charlie Hands
  */
-public class Deck extends Collision{
+public class Deck extends Collision implements Serializable{
 
     
     /**

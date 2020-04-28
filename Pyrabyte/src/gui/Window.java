@@ -35,8 +35,6 @@ public class Window {
         frame.add(main);
         
         MAIN = main;
-        
-        main.start();
     }
     
 }
