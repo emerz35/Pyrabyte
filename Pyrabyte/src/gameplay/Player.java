@@ -16,11 +16,11 @@ public final class Player implements Serializable{
     
     
     private static final long serialVersionUID = 46712984213L;
-    private static final AffineTransform REFLECTION = AffineTransform.getTranslateInstance(0, -HEIGHT/2);
-    static{
+    private static final AffineTransform REFLECTION = AffineTransform./*getTranslateInstance(0, HEIGHT/2)*/getQuadrantRotateInstance(2, WIDTH/2, HEIGHT/2);
+    /*static{
         REFLECTION.concatenate(new AffineTransform(1,0,0,0,-1,0));
-        REFLECTION.concatenate(AffineTransform.getTranslateInstance(0, HEIGHT/2));
-    }
+        REFLECTION.concatenate(AffineTransform.getTranslateInstance(0, -HEIGHT/2));
+    }*/
     
     public final Deck deck;
     public final Hand hand;
@@ -39,8 +39,7 @@ public final class Player implements Serializable{
         paintSelf(g);
         g.setTransform(REFLECTION);
         paintOpponent(g, opponent);
-        g.setTransform(new AffineTransform());
-        
+        g.setTransform(new AffineTransform()); 
     }
     
     public void paintSelf(Graphics2D g){

@@ -69,8 +69,12 @@ public class Board extends MouseAdapter{
                         boardState.flipInput(boardState.right, false);
                         updateHand(dragging);
                     }else if(card instanceof GateCard && !(card instanceof Placeholder)){
-                        ((GateCard) card).output = !((GateCard) card).output;
-                        updateHand(dragging);
+                        if(card.isLeft==local.isLeft){
+                            ((GateCard) card).output = !((GateCard) card).output;
+                            boardState.cascadeRowDestruction(card.isLeft ? boardState.left : boardState.right, 
+                                    card.isLeft, ((GateCard) card).boardY);
+                            updateHand(dragging);
+                        }
                     }
                 }
             }

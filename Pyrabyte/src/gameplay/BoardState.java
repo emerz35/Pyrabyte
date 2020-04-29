@@ -72,7 +72,11 @@ public final class BoardState implements Serializable{
                 board[0][i] = new Placeholder(board[0][i],i,0, board[0][i].isLeft);
         }
         
-        for(int i = 1; i< board.length;i++){
+        cascadeRowDestruction(board, boardIsLeft, 1);
+    }
+    
+    public void cascadeRowDestruction(GateCard[][] board, boolean boardIsLeft, int start){
+        for(int i = start; i< board.length;i++){
             for(int j = 0; j< board[i].length;j++){
                 if(board[i-1][j] instanceof Placeholder || board[i-1][j+1] instanceof Placeholder)
                     board[i][j] = new Placeholder(board[i][j], j,i, board[j][i].isLeft);
