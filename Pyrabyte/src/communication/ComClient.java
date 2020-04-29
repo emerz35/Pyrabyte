@@ -32,7 +32,7 @@ public class ComClient implements ComCom{
     
     
     public ComClient(int port, Board b){
-        client = new Client();
+        client = new Client(8192,8192);
         new ComListener(b).start(client, port);
     }
 

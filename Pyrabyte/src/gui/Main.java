@@ -71,7 +71,7 @@ public class Main extends Canvas{
         Scanner scan = new Scanner(System.in);
 
         //System.out.println("Enter ip uwu:");
-        String ip = scan.nextLine();
+        String ip = "84.64.16.213";//scan.nextLine();
         
         try{
             m.com.connect(5000, ip, port);

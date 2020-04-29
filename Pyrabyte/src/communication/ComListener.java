@@ -25,15 +25,12 @@ import cards.assets.AND;
 import cards.assets.NOT;
 import cards.assets.OR;
 import cards.assets.XOR;
+import com.esotericsoftware.kryo.serializers.JavaSerializer;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-import gameplay.Board;
-import gameplay.BoardState;
-import gameplay.Deck;
-import gameplay.Hand;
-import gameplay.Player;
+import gameplay.*;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -48,7 +45,6 @@ public class ComListener extends Listener{
     
     private final Board board;
     
-    
     public ComListener(Board b){
         board = b;
     }
@@ -58,7 +54,11 @@ public class ComListener extends Listener{
     public void received(Connection ctc, Object ob){
         if(ob instanceof String) System.out.println(ob);
         else if(ob instanceof Player){
-            board.opponent = ((Player) ob);
+            if(board.opponent == null){
+                board.opponent = ((Player) ob);
+                MAIN.start();
+            }
+            else board.opponent = ((Player) ob);
         }else if(ob instanceof BoardState){
             board.boardState = ((BoardState) ob);
         }
@@ -68,8 +68,6 @@ public class ComListener extends Listener{
     public void connected(Connection ctc){
         ctc.sendTCP("The other player has connected!");
         MAIN.com.send(MAIN.localPlayer);
-        MAIN.start();
-
     }
 
     @Override
@@ -79,20 +77,20 @@ public class ComListener extends Listener{
     
     
     public void start(EndPoint end, int port){
-        end.getKryo().register(String.class);
-        end.getKryo().register(Player.class);
-        end.getKryo().register(BoardState.class);
-        end.getKryo().register(Hand.class);
-        end.getKryo().register(Deck.class);
-        end.getKryo().register(Card.class);
-        end.getKryo().register(GateCard.class);
-        end.getKryo().register(InputCard.class);
-        end.getKryo().register(OR.class);
-        end.getKryo().register(XOR.class);
-        end.getKryo().register(NOT.class);
-        end.getKryo().register(AND.class);
-        end.getKryo().register(Placeholder.class);
-        end.getKryo().register(LinkedList.class);
+        end.getKryo().register(String.class, new JavaSerializer());
+        end.getKryo().register(Player.class, new JavaSerializer());
+        end.getKryo().register(BoardState.class, new JavaSerializer());
+        end.getKryo().register(Hand.class, new JavaSerializer());
+        end.getKryo().register(Deck.class, new JavaSerializer());
+        end.getKryo().register(Card.class, new JavaSerializer());
+        end.getKryo().register(GateCard.class, new JavaSerializer());
+        end.getKryo().register(InputCard.class, new JavaSerializer());
+        end.getKryo().register(OR.class, new JavaSerializer());
+        end.getKryo().register(XOR.class, new JavaSerializer());
+        end.getKryo().register(NOT.class, new JavaSerializer());
+        end.getKryo().register(AND.class, new JavaSerializer());
+        end.getKryo().register(Placeholder.class, new JavaSerializer());
+        end.getKryo().register(LinkedList.class, new JavaSerializer());
         end.addListener(this);
         if(end instanceof Server){
             try{

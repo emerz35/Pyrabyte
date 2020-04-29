@@ -29,8 +29,12 @@ import static gui.Main.*;
  * @author Charlie Hands
  */
 public class Hand implements Serializable{
+
+
+    private static final long serialVersionUID = 46723893920L;
     
     public final List<Card> list = new LinkedList<>();
+    
     
     public void paint(Graphics2D g, boolean faceUp){
         if(faceUp) list.forEach(x->x.paint(g));
