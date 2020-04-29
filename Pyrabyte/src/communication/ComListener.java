@@ -50,15 +50,15 @@ public class ComListener extends Listener{
             ob = fromByteArray((byte[]) ob);
             if(ob instanceof String) System.out.println(ob);
             else if(ob instanceof Player){
-                System.out.println("Recieved Player");
+                System.out.println("Recieved player");
                 if(board.opponent == null){
                     board.opponent = ((Player) ob);
                     MAIN.start();
                 }else board.opponent = ((Player) ob);
             }else if(ob instanceof BoardState){
-                System.out.println("Recieved BoardState");
+                System.out.println("Recieved Board state");
                 board.boardState = ((BoardState) ob);
-            }else System.out.println("Recieved Nothing");
+            }else System.out.println("Recieved nothing");
         }
     }
 
