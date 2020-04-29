@@ -61,16 +61,16 @@ public class Board extends MouseAdapter{
             if(card!=null){
                 if(dragging instanceof GateCard && card instanceof GateCard){
                     if(boardState.addGateCard(local.isLeft,(GateCard)dragging,(GateCard)card))
-                        local.hand.list.remove(dragging);
+                        updateHand(dragging);
                 }else if(!(dragging instanceof GateCard)){
                     if(card instanceof InputCard){
                         ((InputCard) card).flip();
                         boardState.flipInput(boardState.left, true);
                         boardState.flipInput(boardState.right, false);
-                        local.hand.list.remove(dragging);
+                        updateHand(dragging);
                     }else if(card instanceof GateCard && !(card instanceof Placeholder)){
                         ((GateCard) card).output = !((GateCard) card).output;
-                        local.hand.list.remove(dragging);
+                        updateHand(dragging);
                     }
                 }
             }
@@ -88,7 +88,8 @@ public class Board extends MouseAdapter{
     
     @Remote
     public void updateHand(Card card){
-        local.hand.list.remove(dragging);
+        local.hand.list.remove(card);
+        System.out.println("update hand");
         MAIN.com.send(boardState);
         MAIN.com.send(local);
     }

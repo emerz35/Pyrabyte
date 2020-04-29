@@ -28,6 +28,7 @@ import java.io.IOException;
 
 import static gui.Window.MAIN;
 import static utils.Serializer.fromByteArray;
+import static utils.Serializer.toByteArray;
 
 /**
  *
@@ -50,19 +51,21 @@ public class ComListener extends Listener{
             ob = fromByteArray((byte[]) ob);
             if(ob instanceof String) System.out.println(ob);
             else if(ob instanceof Player){
+                System.out.println("Recieved player");
                 if(board.opponent == null){
                     board.opponent = ((Player) ob);
                     MAIN.start();
                 }else board.opponent = ((Player) ob);
             }else if(ob instanceof BoardState){
+                System.out.println("Recieved Board state");
                 board.boardState = ((BoardState) ob);
-            }
+            }else System.out.println("Recieved nothing");
         }
     }
 
     @Override
     public void connected(Connection ctc){
-        ctc.sendTCP("The other player has connected!");
+        ctc.sendTCP(toByteArray("The other player has connected!"));
     }
 
     @Override
