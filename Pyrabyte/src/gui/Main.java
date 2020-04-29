@@ -39,7 +39,7 @@ public class Main extends Canvas{
         
         localPlayer = new Player(isServer);
         
-        boardUwu = new Board(6, localPlayer);
+        boardUwu = new Board(4, localPlayer);
         
         com = createComInstance(boardUwu, isServer, port);
         
