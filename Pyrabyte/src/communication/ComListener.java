@@ -17,24 +17,18 @@
 
 package communication;
 
-import cards.Card;
-import cards.GateCard;
-import cards.InputCard;
-import cards.Placeholder;
-import cards.assets.AND;
-import cards.assets.NOT;
-import cards.assets.OR;
-import cards.assets.XOR;
-import com.esotericsoftware.kryo.serializers.JavaSerializer;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-import gameplay.*;
+import gameplay.Board;
+import gameplay.BoardState;
+import gameplay.Player;
 import java.io.IOException;
-import java.util.LinkedList;
 
 import static gui.Window.MAIN;
+import static utils.Serializer.fromByteArray;
+import static utils.Serializer.toByteArray;
 
 /**
  *
@@ -52,21 +46,25 @@ public class ComListener extends Listener{
     
     @Override
     public void received(Connection ctc, Object ob){
-        if(ob instanceof String) System.out.println(ob);
-        else if(ob instanceof Player){
-            if(board.opponent == null){
-                board.opponent = ((Player) ob);
-                MAIN.start();
-            }
-            else board.opponent = ((Player) ob);
-        }else if(ob instanceof BoardState){
-            board.boardState = ((BoardState) ob);
+        if(ob instanceof byte[]){
+            ob = fromByteArray((byte[]) ob);
+            if(ob instanceof String) System.out.println(ob);
+            else if(ob instanceof Player){
+                System.out.println("Recieved Player");
+                if(board.opponent == null){
+                    board.opponent = ((Player) ob);
+                    MAIN.start();
+                }else board.opponent = ((Player) ob);
+            }else if(ob instanceof BoardState){
+                System.out.println("Recieved BoardState");
+                board.boardState = ((BoardState) ob);
+            }else System.out.println("Recieved Nothing");
         }
     }
 
     @Override
     public void connected(Connection ctc){
-        ctc.sendTCP("The other player has connected!");
+        ctc.sendTCP(toByteArray("The other player has connected!"));
     }
 
     @Override
@@ -76,21 +74,7 @@ public class ComListener extends Listener{
     
     
     public void start(EndPoint end, int port){
-        //JavaSerializer serial = new JavaSerializer();
-        end.getKryo().register(String.class, new JavaSerializer());
-        end.getKryo().register(Player.class, new JavaSerializer());
-        end.getKryo().register(BoardState.class, new JavaSerializer());
-        end.getKryo().register(Hand.class, new JavaSerializer());
-        end.getKryo().register(Deck.class, new JavaSerializer());
-        end.getKryo().register(Card.class, new JavaSerializer());
-        end.getKryo().register(GateCard.class, new JavaSerializer());
-        end.getKryo().register(InputCard.class, new JavaSerializer());
-        end.getKryo().register(OR.class, new JavaSerializer());
-        end.getKryo().register(XOR.class, new JavaSerializer());
-        end.getKryo().register(NOT.class, new JavaSerializer());
-        end.getKryo().register(AND.class, new JavaSerializer());
-        end.getKryo().register(Placeholder.class, new JavaSerializer());
-        end.getKryo().register(LinkedList.class, new JavaSerializer());
+        end.getKryo().register(byte[].class);
         end.addListener(this);
         if(end instanceof Server){
             try{

@@ -20,6 +20,7 @@ package communication;
 import com.esotericsoftware.kryonet.Client;
 import gameplay.Board;
 import java.io.IOException;
+import utils.Serializer;
 
 /**
  *
@@ -32,14 +33,14 @@ public class ComClient implements ComCom{
     
     
     public ComClient(int port, Board b){
-        client = new Client();
+        client = new Client(8192, 4096);
         new ComListener(b).start(client, port);
     }
 
     
     @Override
     public void send(Object ob){
-        client.sendTCP(ob);
+        client.sendTCP(Serializer.toByteArray(ob));
     }
     
     @Override
