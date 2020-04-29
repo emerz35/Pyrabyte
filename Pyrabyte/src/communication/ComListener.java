@@ -55,7 +55,10 @@ public class ComListener extends Listener{
     public void received(Connection ctc, Object ob){
         if(ob instanceof String) System.out.println(ob);
         else if(ob instanceof Player){
-            board.opponent = ((Player) ob);
+            if(board.opponent == null){
+                board.opponent = ((Player) ob);
+                MAIN.start();
+            }else board.opponent = ((Player) ob);
         }else if(ob instanceof BoardState){
             board.boardState = ((BoardState) ob);
         }
@@ -64,9 +67,6 @@ public class ComListener extends Listener{
     @Override
     public void connected(Connection ctc){
         ctc.sendTCP("The other player has connected!");
-        MAIN.com.send(MAIN.localPlayer);
-        MAIN.start();
-
     }
 
     @Override
@@ -76,21 +76,21 @@ public class ComListener extends Listener{
     
     
     public void start(EndPoint end, int port){
-        JavaSerializer serial = new JavaSerializer();
-        end.getKryo().register(String.class, serial);
-        end.getKryo().register(Player.class, serial);
-        end.getKryo().register(BoardState.class, serial);
-        end.getKryo().register(Hand.class, serial);
-        end.getKryo().register(Deck.class, serial);
-        end.getKryo().register(Card.class, serial);
-        end.getKryo().register(GateCard.class, serial);
-        end.getKryo().register(InputCard.class, serial);
-        end.getKryo().register(OR.class, serial);
-        end.getKryo().register(XOR.class, serial);
-        end.getKryo().register(NOT.class, serial);
-        end.getKryo().register(AND.class, serial);
-        end.getKryo().register(Placeholder.class, serial);
-        end.getKryo().register(LinkedList.class, serial);
+        //JavaSerializer serial = new JavaSerializer();
+        end.getKryo().register(String.class, new JavaSerializer());
+        end.getKryo().register(Player.class, new JavaSerializer());
+        end.getKryo().register(BoardState.class, new JavaSerializer());
+        end.getKryo().register(Hand.class, new JavaSerializer());
+        end.getKryo().register(Deck.class, new JavaSerializer());
+        end.getKryo().register(Card.class, new JavaSerializer());
+        end.getKryo().register(GateCard.class, new JavaSerializer());
+        end.getKryo().register(InputCard.class, new JavaSerializer());
+        end.getKryo().register(OR.class, new JavaSerializer());
+        end.getKryo().register(XOR.class, new JavaSerializer());
+        end.getKryo().register(NOT.class, new JavaSerializer());
+        end.getKryo().register(AND.class, new JavaSerializer());
+        end.getKryo().register(Placeholder.class, new JavaSerializer());
+        end.getKryo().register(LinkedList.class, new JavaSerializer());
         end.addListener(this);
         if(end instanceof Server){
             try{

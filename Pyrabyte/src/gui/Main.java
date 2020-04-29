@@ -84,8 +84,13 @@ public class Main extends Canvas{
         
         System.out.println("Recieving text input...");
         
+        String mes;
         while(true){
-            m.com.send(scan.nextLine());
+            mes = scan.nextLine();
+            if(mes.equals("/send")){
+                System.out.println("Sending player...");
+                m.com.send(m.localPlayer);
+            }else m.com.send(mes);
         }
     }
     
