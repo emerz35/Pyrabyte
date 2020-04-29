@@ -67,7 +67,6 @@ public class ComListener extends Listener{
     @Override
     public void connected(Connection ctc){
         ctc.sendTCP("The other player has connected!");
-        MAIN.com.send(MAIN.localPlayer);
     }
 
     @Override
@@ -77,6 +76,7 @@ public class ComListener extends Listener{
     
     
     public void start(EndPoint end, int port){
+        //JavaSerializer serial = new JavaSerializer();
         end.getKryo().register(String.class, new JavaSerializer());
         end.getKryo().register(Player.class, new JavaSerializer());
         end.getKryo().register(BoardState.class, new JavaSerializer());
