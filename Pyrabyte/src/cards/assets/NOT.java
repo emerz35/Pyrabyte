@@ -54,7 +54,6 @@ public class NOT extends Card implements Modifier{
             b.boardState.flipInput(b.boardState.left, true);
             b.boardState.flipInput(b.boardState.right, false);
         }
-        
     }
 
     @Override

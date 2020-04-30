@@ -59,5 +59,10 @@ public class Hand implements Serializable{
         card.x = x;
         card.y = y;
     }
+    
+    public void scoopCards(Deck deck){
+        list.forEach(c-> deck.cards.add(c));
+        list.clear();
+    }
      
 }

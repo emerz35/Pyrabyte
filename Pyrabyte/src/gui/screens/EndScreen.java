@@ -22,12 +22,15 @@ import java.awt.geom.AffineTransform;
 
 import static gui.Main.HEIGHT;
 import static gui.Main.WIDTH;
+import gui.buttons.NewGameButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
  * @author Adam Whittaker
  */
-public class EndScreen implements Screen{
+public class EndScreen extends MouseAdapter implements Screen{
     
 
     /**
@@ -58,9 +61,11 @@ public class EndScreen implements Screen{
     private final AffineTransform rotation = new AffineTransform();
     private final String message;
 
+    private final NewGameButton nGBtn;
     
-    public EndScreen(String mes){
+    public EndScreen(String mes, NewGameButton btn){
         message = mes;
+        nGBtn = btn;
     }
     
     
@@ -90,6 +95,7 @@ public class EndScreen implements Screen{
         FontMetrics f = g.getFontMetrics();
         g.drawString(message, (WIDTH - f.stringWidth(message))/2, HEIGHT/2 + f.getDescent());
         g.setTransform(new AffineTransform());
+        nGBtn.paint(g);
     }
     
     /**
@@ -98,6 +104,11 @@ public class EndScreen implements Screen{
      */
     private void updateAngle(){
         rotation.rotate(ANGULAR_VELOCITY, WIDTH/2, HEIGHT/2);
+    }
+    
+    @Override
+    public void mouseClicked(MouseEvent e){
+        nGBtn.checkClicked(e.getX(), e.getY());
     }
     
 }

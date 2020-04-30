@@ -38,12 +38,12 @@ import static utils.Serializer.toByteArray;
 public class ComListener extends Listener{
     
     
+            
     private final Board board;
     
     public ComListener(Board b){
         board = b;
     }
-    
     
     @Override
     public void received(Connection ctc, Object ob){
@@ -51,7 +51,12 @@ public class ComListener extends Listener{
             ob = fromByteArray((byte[]) ob);
             if(ob instanceof EventMessage){
                 if(ob.equals(EventMessage.PASS)) board.switchTurn(true);
-                else if(ob.equals(EventMessage.WIN)) MAIN.setScreen(new EndScreen("LOSE"));
+                else if(ob.equals(EventMessage.WIN)) 
+                   MAIN.setScreen(new EndScreen("LOSE", board.nGBtn));
+                else if(ob.equals(EventMessage.NEWGAME)){
+                    if(board.nGBtn.requestSent) board.newGame();
+                    else board.nGBtn.recieveRequest();
+                }
             }else if(ob instanceof String) System.out.println(ob);
             else if(ob instanceof Player){
                 System.out.println("Recieved player");

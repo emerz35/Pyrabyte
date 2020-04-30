@@ -21,5 +21,5 @@ package communication;
  * @author Charlie Hands
  */
 public enum EventMessage {
-    PASS,WIN
+    PASS,WIN,NEWGAME;
 }

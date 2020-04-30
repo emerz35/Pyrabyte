@@ -145,6 +145,7 @@ public final class BoardState implements Serializable{
                 if(mod instanceof Card)deck.cards.add((Card)mod);
             });
             c.modifiers.clear();
+            if(c instanceof GateCard)((GateCard) c).modOutput = ((GateCard) c).output;
             deck.cards.add(c);
         }
     }
