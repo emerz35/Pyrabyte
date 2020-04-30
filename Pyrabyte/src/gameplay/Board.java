@@ -152,6 +152,7 @@ public class Board extends MouseAdapter implements Screen{
             sendAllInfo();
         }
         local.getMultipleCardsToHand(inputNum-1);
+        nGBtn = new NewGameButton(WIDTH/2, 5*HEIGHT/6,BUTTON_WIDTH*2, BUTTON_HEIGHT*2, this);
         MAIN.setScreen(this);
     }
     
