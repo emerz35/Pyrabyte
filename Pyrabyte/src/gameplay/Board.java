@@ -70,7 +70,7 @@ public class Board extends MouseAdapter implements Screen{
         btns.forEach(x->x.checkClicked(e.getX(), e.getY()));
         if(local.deck.withinBounds(e.getX(), e.getY())&& isTurn){
             local.getCardToHand();
-            
+            MAIN.com.send(local);
         }
     }
     

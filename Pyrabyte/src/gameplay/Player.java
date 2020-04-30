@@ -6,8 +6,6 @@ import java.awt.geom.AffineTransform;
 import java.io.Serializable;
 
 import static gui.Main.*;
-import static gui.Window.MAIN;
-import utils.Utils.Remote;
 
 
 /**
@@ -55,10 +53,8 @@ public final class Player implements Serializable{
         opponent.hand.paint(g, false);
     }
     
-    @Remote
     public void getCardToHand(){
         hand.addCard(deck.cards.removeFirst());
-        MAIN.com.send(this);
     }
     
     public void getMultipleCardsToHand(int cardNum){
