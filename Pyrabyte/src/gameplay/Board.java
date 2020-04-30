@@ -6,6 +6,7 @@ import cards.GateCard;
 import cards.Modifier;
 import communication.EventMessage;
 import gui.buttons.Button;
+import gui.buttons.NewGameButton;
 import gui.buttons.PassTurnButton;
 import gui.screens.EndScreen;
 import gui.screens.Screen;
@@ -19,7 +20,6 @@ import utils.Utils.Remote;
 
 import static gui.Main.*;
 import static gui.Window.MAIN;
-import gui.buttons.NewGameButton;
 
 
 
@@ -70,7 +70,7 @@ public class Board extends MouseAdapter implements Screen{
         btns.forEach(x->x.checkClicked(e.getX(), e.getY()));
         if(local.deck.withinBounds(e.getX(), e.getY())&& isTurn){
             local.getCardToHand();
-            
+            MAIN.com.send(this);
         }
     }
     
