@@ -48,7 +48,10 @@ public class ComListener extends Listener{
     public void received(Connection ctc, Object ob){
         if(ob instanceof byte[]){
             ob = fromByteArray((byte[]) ob);
-            if(ob instanceof String) System.out.println(ob);
+            if(ob instanceof EventMessage){
+                if(ob == EventMessage.PASS)board.switchTurn(true);
+            }
+            else if(ob instanceof String) System.out.println(ob);
             else if(ob instanceof Player){
                 System.out.println("Recieved player");
                 if(board.opponent == null){

@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static communication.ComCom.createComInstance;
+import java.awt.Color;
 
 /**
  *
@@ -21,7 +22,10 @@ public class Main extends Canvas{
     public static final Random R = new Random();
     
     public final static int WIDTH = 1240, HEIGHT = 800, CARD_WIDTH = 64,
-            CARD_HEIGHT = 64, PADDING_X = CARD_WIDTH/4, PADDING_Y = CARD_HEIGHT/4; 
+            CARD_HEIGHT = 64, PADDING_X = CARD_WIDTH/4, PADDING_Y = CARD_HEIGHT/4,
+            BUTTON_WIDTH = 64, BUTTON_HEIGHT = 32;  
+    
+    public final static Color ACTIVE_BUTTON_COLOR = Color.CYAN, DEACTIVE_BUTTON_COLOR = Color.LIGHT_GRAY;
     /*static{
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         WIDTH = dim.width;
@@ -32,7 +36,7 @@ public class Main extends Canvas{
     protected final Window window;
     private final Thread renderThread;
     private final Renderer renderer;
-    protected final Board boardUwu;
+    public final Board boardUwu;
     public final Player localPlayer;
     
     public Main(String ip, int port, boolean isServer){
@@ -57,6 +61,7 @@ public class Main extends Canvas{
         renderThread.setDaemon(true);
         renderThread.start();
     }
+    
     
 
     /**
