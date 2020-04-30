@@ -61,7 +61,7 @@ public class Deck extends Collision implements Serializable{
         super(x, y, w, h);
     }
     
-    public Deck(int x, int y, int w, int h, int cardNum){
+    public Deck(int x, int y, int w, int h, int cardNum, boolean isLeft){
         this(x,y,w,h);
         
         Card temp;
@@ -76,6 +76,7 @@ public class Deck extends Collision implements Serializable{
                 default: temp = new XOR(CARD_WIDTH, CARD_HEIGHT); 
                     break;
             }
+            temp.isLeft = isLeft;
             cards.add(temp);
         }
     }
