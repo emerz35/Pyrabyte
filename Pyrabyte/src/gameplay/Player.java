@@ -32,7 +32,7 @@ public final class Player implements Serializable{
         this.isLeft = isLeft;
         hand = new Hand();
         deck = new Deck(WIDTH-CARD_WIDTH -PADDING_X, HEIGHT-CARD_HEIGHT-PADDING_Y,CARD_WIDTH,CARD_HEIGHT, 30, isLeft);
-        getStartingHand(inputNum-1);
+        getMultipleCardsToHand(inputNum-1);
     }
     
     
@@ -57,7 +57,7 @@ public final class Player implements Serializable{
         hand.addCard(deck.cards.removeFirst());
     }
     
-    public void getStartingHand(int cardNum){
+    public void getMultipleCardsToHand(int cardNum){
         for(int i=0;i<cardNum;i++){
             getCardToHand();
         }
