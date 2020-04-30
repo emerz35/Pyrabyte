@@ -60,7 +60,7 @@ public class Hand implements Serializable{
         card.y = y;
     }
     
-    public void scoopCards(Deck deck){
+    public void scoopHand(Deck deck){
         list.forEach(c-> deck.cards.add(c));
         list.clear();
     }

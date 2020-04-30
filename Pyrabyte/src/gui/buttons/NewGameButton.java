@@ -43,12 +43,13 @@ public class NewGameButton extends Button{
 
     @Override
     public void run() {
-        if(!requestSent && !requestRecieved){
-            color = requestedColor;
+        if(!requestSent){
             MAIN.com.send(EventMessage.NEWGAME);
-            requestSent = true;
-        }else if(requestRecieved){
-            board.newGame();
+            if(!requestRecieved){
+                color = requestedColor;
+                requestSent = true;
+            }else 
+                board.newGame();
         }
         
     }
