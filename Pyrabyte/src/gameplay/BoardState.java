@@ -87,13 +87,13 @@ public final class BoardState implements Serializable{
     public void paint(Graphics2D g){
         for(GateCard[] row : left){
             for(GateCard c: row){
-                c.paint(g);
+                c.paintCard(g);
             }
         }
         
         for(GateCard[] row : right){
             for(GateCard c: row){
-                c.paint(g);
+                c.paintCard(g);
             }
         }
         
@@ -126,7 +126,7 @@ public final class BoardState implements Serializable{
             return card.compatible(boardIsLeft? input[x].left:input[x].right,boardIsLeft? input[x+1].left:input[x+1].right);
         }else{
             return !(board[y-1][x] instanceof Placeholder || board[y-1][x+1] instanceof Placeholder) 
-                    && card.compatible(boardIsLeft? left[y-1][x].output:right[y-1][x].output, boardIsLeft? left[y-1][x+1].output:right[y-1][x+1].output);
+                    && card.compatible(boardIsLeft? left[y-1][x].modOutput:right[y-1][x].modOutput, boardIsLeft? left[y-1][x+1].modOutput:right[y-1][x+1].modOutput);
         }
     }
     

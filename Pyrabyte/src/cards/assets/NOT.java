@@ -48,13 +48,30 @@ public class NOT extends Card implements Modifier{
 
     @Override
     public void effect(Card c, Board b){
-        if(c instanceof GateCard) ((GateCard) c).output = !((GateCard) c).output;
-        else if(c instanceof InputCard) ((InputCard) c).flip();
+        if(c instanceof GateCard){
+            ((GateCard) c).modOutput = !((GateCard) c).modOutput;
+            b.boardState.cascadeRowDestruction(c.isLeft ? b.boardState.left : b.boardState.right, 
+                        c.isLeft, ((GateCard) c).boardY+1);
+        }else if(c instanceof InputCard){
+            ((InputCard) c).flip();
+            b.boardState.flipInput(b.boardState.left, true);
+            b.boardState.flipInput(b.boardState.right, false);
+        }
+        b.updateHand(c);
     }
 
     @Override
     public boolean isTarget(Card c){
-        return player == c.player && (c instanceof GateCard || c instanceof InputCard);
+        return c instanceof InputCard || (player == c.player && c instanceof GateCard);
+    }
+
+    @Override
+    public void paintEffect(Graphics2D g, int x, int y){
+        g.setColor(Color.RED.darker());
+        g.fillRect(x, y, width/6, height);
+        g.fillRect(x+5*width/6, y, width/6, height);
+        g.fillRect(x+width/6, y, 2*width/3, height/6);
+        g.fillRect(x+width/6, y+5*height/6, 2*width/3, height/6);
     }
     
 }

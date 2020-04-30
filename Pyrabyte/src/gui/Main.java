@@ -25,8 +25,8 @@ public class Main extends Canvas{
     
     public static final Random R = new Random();
     
-    public final static int WIDTH = 1240, HEIGHT = 800, CARD_WIDTH = 64,
-            CARD_HEIGHT = 64, PADDING_X = CARD_WIDTH/4, PADDING_Y = CARD_HEIGHT/4,
+    public final static int WIDTH = 1240, HEIGHT = 800, CARD_WIDTH = 72,
+            CARD_HEIGHT = 72, PADDING_X = CARD_WIDTH/4, PADDING_Y = CARD_HEIGHT/4,
             BUTTON_WIDTH = 64, BUTTON_HEIGHT = 32;  
     
     public final static Color ACTIVE_BUTTON_COLOR = Color.CYAN, DEACTIVE_BUTTON_COLOR = Color.LIGHT_GRAY;

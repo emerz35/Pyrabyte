@@ -3,8 +3,7 @@ package gameplay;
 
 import cards.Card;
 import cards.GateCard;
-import cards.InputCard;
-import cards.Placeholder;
+import cards.Modifier;
 import communication.EventMessage;
 import gui.buttons.Button;
 import gui.buttons.PassTurnButton;
@@ -84,20 +83,13 @@ public class Board extends MouseAdapter implements Screen{
                 if(dragging instanceof GateCard && card instanceof GateCard){
                     if(boardState.addGateCard(local.isLeft,(GateCard)dragging,(GateCard)card)){
                         updateHand(dragging);
-                        if(((GateCard)card).boardY == boardState.input.length - 2) registerWin();
+                        if(((GateCard)card).boardY >= boardState.input.length - 2) registerWin();
                     }
                 }else if(!(dragging instanceof GateCard)){
-                    if(card instanceof InputCard){
-                        ((InputCard) card).flip();
-                        boardState.flipInput(boardState.left, true);
-                        boardState.flipInput(boardState.right, false);
-                        updateHand(dragging);
-                    }else if(card instanceof GateCard && !(card instanceof Placeholder)){
-                        if(card.isLeft==local.isLeft){
-                            ((GateCard) card).output = !((GateCard) card).output;
-                            boardState.cascadeRowDestruction(card.isLeft ? boardState.left : boardState.right, 
-                                    card.isLeft, ((GateCard) card).boardY);
-                            updateHand(dragging);
+                    if(dragging instanceof Modifier){
+                        if(((Modifier) dragging).isTarget(card)){
+                            ((Modifier) dragging).effect(card, this);
+                            card.modifiers.add((Modifier) dragging);
                         }
                     }
                 }
