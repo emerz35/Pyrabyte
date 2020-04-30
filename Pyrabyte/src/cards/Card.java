@@ -1,7 +1,6 @@
 
 package cards;
 
-import gameplay.Player;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.LinkedList;
@@ -16,7 +15,6 @@ public abstract class Card extends Collision{
     
     public String name;
     public final LinkedList<Modifier> modifiers = new LinkedList<>();
-    public Player player;
     public boolean isLeft;
     
     

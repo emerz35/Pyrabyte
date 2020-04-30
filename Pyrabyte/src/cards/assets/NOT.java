@@ -17,10 +17,7 @@
 
 package cards.assets;
 
-import cards.Card;
-import cards.GateCard;
-import cards.InputCard;
-import cards.Modifier;
+import cards.*;
 import gameplay.Board;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -51,7 +48,7 @@ public class NOT extends Card implements Modifier{
         if(c instanceof GateCard){
             ((GateCard) c).modOutput = !((GateCard) c).modOutput;
             b.boardState.cascadeRowDestruction(c.isLeft ? b.boardState.left : b.boardState.right, 
-                        c.isLeft, ((GateCard) c).boardY);
+                        c.isLeft, ((GateCard) c).boardY+1);
         }else if(c instanceof InputCard){
             ((InputCard) c).flip();
             b.boardState.flipInput(b.boardState.left, true);
@@ -62,7 +59,7 @@ public class NOT extends Card implements Modifier{
 
     @Override
     public boolean isTarget(Card c){
-        return c instanceof InputCard || (player == c.player && c instanceof GateCard);
+        return c instanceof InputCard || (isLeft == c.isLeft && c instanceof GateCard && !(c instanceof Placeholder));
     }
 
     @Override
