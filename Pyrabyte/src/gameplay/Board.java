@@ -83,9 +83,9 @@ public class Board extends MouseAdapter{
     
     @Override
     public void mouseReleased(MouseEvent e){
-        if(dragging!= null && isTurn){
+        if(dragging!= null){
             Card card = boardState.clickedOn(e.getX(), e.getY());
-            if(card!=null){
+            if(card!=null && isTurn){
                 if(dragging instanceof GateCard && card instanceof GateCard){
                     if(boardState.addGateCard(local.isLeft,(GateCard)dragging,(GateCard)card))
                         updateHand(dragging);
