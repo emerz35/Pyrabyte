@@ -5,12 +5,12 @@ import communication.ComCom;
 import gameplay.Board;
 import gameplay.Player;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
 import static communication.ComCom.createComInstance;
-import java.awt.Color;
 
 /**
  *
@@ -70,7 +70,7 @@ public class Main extends Canvas{
     public static void main(String[] args) {
 
         int port = 27960;
-        Main m = new Main("", port, false);
+        Main m = new Main("", port, true);
 
         
         Scanner scan = new Scanner(System.in);
