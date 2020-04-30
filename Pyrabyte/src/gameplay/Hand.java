@@ -37,7 +37,7 @@ public class Hand implements Serializable{
     
     
     public void paint(Graphics2D g, boolean faceUp){
-        if(faceUp) list.forEach(x->x.paint(g));
+        if(faceUp) list.forEach(x->x.paintCard(g));
         else list.forEach(x->x.paintFaceDown(g));
     }
     

@@ -31,8 +31,8 @@ public class AND extends GateCard{
     public AND(int w, int h){
         super("AND", w, h);
     }
-    
 
+    
     @Override
     public boolean compatible(boolean a, boolean b){
         return (a&&b)==output;

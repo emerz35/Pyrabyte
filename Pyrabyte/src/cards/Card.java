@@ -29,7 +29,12 @@ public abstract class Card extends Collision{
         name = n;
     }
     
-    public abstract void paint(Graphics2D g);
+    protected abstract void paint(Graphics2D g);
+    
+    public void paintCard(Graphics2D g){
+        paint(g);
+        modifiers.forEach(mod -> mod.paintEffect(g, x, y));
+    }
     
     public void paintBoolean(Graphics2D g, boolean on, int tx, int ty, Color col, Color background){
         g.setColor(col);

@@ -18,6 +18,7 @@
 package cards;
 
 import gameplay.Board;
+import java.awt.Graphics2D;
 import java.io.Serializable;
 
 /**
@@ -30,5 +31,7 @@ public interface Modifier extends Serializable{
     public void effect(Card c, Board b);
     
     public boolean isTarget(Card c);
+    
+    public void paintEffect(Graphics2D g, int x, int y);
     
 }

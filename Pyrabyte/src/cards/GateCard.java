@@ -29,7 +29,8 @@ import static gui.Main.R;
 public abstract class GateCard extends Card{
     
     
-    public boolean output;
+    public final boolean output;
+    public boolean modOutput;
     
     public int boardX = -1, boardY = -1;
     
@@ -37,11 +38,13 @@ public abstract class GateCard extends Card{
     public GateCard(String n, int w, int h, boolean out){
         super(n, w, h);
         output = out;
+        modOutput = out;
     }
     
     public GateCard(String n, int x, int y, int w, int h, boolean out){
         super(n,x,y, w, h);
         output = out;
+        modOutput = out;
     }
     
     public GateCard(String n, int w, int h){
@@ -55,7 +58,7 @@ public abstract class GateCard extends Card{
     public void defaultPaint(Graphics2D g, Color col){
         g.setColor(col);
         g.fillRect(x, y, width, height);
-        paintBoolean(g, output, x+3*width/8, y+3*height/8, col.darker(), col);
+        paintBoolean(g, modOutput, x+3*width/8, y+3*height/8, col.darker(), col);
     }
     
 }
