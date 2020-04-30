@@ -90,6 +90,7 @@ public class Board extends MouseAdapter implements Screen{
                         if(((Modifier) dragging).isTarget(card)){
                             ((Modifier) dragging).effect(card, this);
                             card.modifiers.add((Modifier) dragging);
+                            updateHand(dragging);
                         }
                     }
                 }
