@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
+import utils.EffectManager;
 import utils.Utils.Remote;
 
 import static gui.Main.*;
@@ -29,17 +30,14 @@ public class Board extends MouseAdapter implements Screen{
     
     
     public volatile BoardState boardState;
-    
+    private final EffectManager background = new EffectManager(14, 0.01);
     public final Player local; 
-    public volatile Player opponent;
-    
-    private Card dragging;
-    
-    public final PassTurnButton passTurnButton;
-    
+    public volatile Player opponent;    
+    private Card dragging;    
+    public final PassTurnButton passTurnButton;    
     public List<Button> btns = new LinkedList<>();
-    
     public boolean isTurn;
+    
     
     public Board(int inputNum, Player you, boolean isServer){
         if(isServer) boardState = new BoardState(inputNum);
@@ -54,6 +52,7 @@ public class Board extends MouseAdapter implements Screen{
     
     @Override
     public void paint(Graphics2D g){
+        background.paintAndTick(g);
         boardState.paint(g);
         local.paint(g, opponent);
         btns.forEach(x -> x.paint(g));
@@ -90,6 +89,7 @@ public class Board extends MouseAdapter implements Screen{
                         if(((Modifier) dragging).isTarget(card)){
                             ((Modifier) dragging).effect(card, this);
                             card.modifiers.add((Modifier) dragging);
+                            updateHand(dragging);
                         }
                     }
                 }
