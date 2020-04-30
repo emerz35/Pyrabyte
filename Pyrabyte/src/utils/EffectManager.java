@@ -34,7 +34,7 @@ public class EffectManager{
         
     public LinkedList<BackgroundEffect> effects = new LinkedList<>();
     public int cap;
-    public double intensity, velx = 0.0, vely = 0.03;
+    public double intensity, velx = 0.0, vely = 0.3;
     
     
     public EffectManager(int c, double i){
