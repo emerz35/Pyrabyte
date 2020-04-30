@@ -38,7 +38,6 @@ import static utils.Serializer.toByteArray;
 public class ComListener extends Listener{
     
     
-            
     private final Board board;
     
     public ComListener(Board b){

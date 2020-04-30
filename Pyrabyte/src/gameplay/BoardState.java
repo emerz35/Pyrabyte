@@ -137,7 +137,7 @@ public final class BoardState implements Serializable{
         return null;
     }
     
-    public void scoopCards(boolean isLeft, Deck deck){
+    public void scoopBoard(boolean isLeft, Deck deck){
         GateCard[][] board = isLeft? left:right;
         
         for(Card[] row : board) for(Card c : row){

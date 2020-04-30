@@ -156,8 +156,8 @@ public class Board extends MouseAdapter implements Screen{
     }
     
     public void scoopCards(){
-        boardState.scoopCards(local.isLeft, local.deck);
-        local.hand.scoopCards(local.deck);
+        boardState.scoopBoard(local.isLeft, local.deck);
+        local.hand.scoopHand(local.deck);
 
     }
 }
