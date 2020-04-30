@@ -48,7 +48,7 @@ public class Renderer implements Runnable{
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
             
-            main.boardUwu.paint(g);
+            main.currentScreen.paint(g);
 
             g.dispose();
             bs.show();

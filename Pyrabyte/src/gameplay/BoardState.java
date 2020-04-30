@@ -114,7 +114,7 @@ public final class BoardState implements Serializable{
             card.boardX = toReplace.boardX;
             card.boardY = toReplace.boardY;
             
-            card.isLeft = toReplace.isLeft;
+            card.isLeft = toReplace.isLeft;            
             return true;
         }
         else return false;

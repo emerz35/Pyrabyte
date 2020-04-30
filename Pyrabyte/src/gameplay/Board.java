@@ -6,26 +6,19 @@ import cards.GateCard;
 import cards.InputCard;
 import cards.Placeholder;
 import communication.EventMessage;
-import static gui.Main.ACTIVE_BUTTON_COLOR;
-import static gui.Main.BUTTON_HEIGHT;
-import static gui.Main.BUTTON_WIDTH;
-import static gui.Main.CARD_HEIGHT;
-import static gui.Main.CARD_WIDTH;
-import static gui.Main.DEACTIVE_BUTTON_COLOR;
-import static gui.Main.HEIGHT;
-import static gui.Main.PADDING_X;
-import static gui.Main.PADDING_Y;
-import static gui.Main.WIDTH;
+import gui.buttons.Button;
+import gui.buttons.PassTurnButton;
+import gui.screens.EndScreen;
+import gui.screens.Screen;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import utils.Utils.Remote;
-
-import static gui.Window.MAIN;
-import gui.buttons.Button;
-import gui.buttons.PassTurnButton;
 import java.util.LinkedList;
 import java.util.List;
+import utils.Utils.Remote;
+
+import static gui.Main.*;
+import static gui.Window.MAIN;
 
 
 
@@ -33,7 +26,7 @@ import java.util.List;
  *
  * @author Charlie Hands
  */
-public class Board extends MouseAdapter{
+public class Board extends MouseAdapter implements Screen{
     
     
     public volatile BoardState boardState;
@@ -54,11 +47,13 @@ public class Board extends MouseAdapter{
         local = you;
         isTurn = isServer;
         
-        passTurnButton = new PassTurnButton(WIDTH-CARD_WIDTH -PADDING_X, HEIGHT-CARD_HEIGHT-PADDING_Y - BUTTON_WIDTH,BUTTON_WIDTH,BUTTON_HEIGHT, ACTIVE_BUTTON_COLOR, DEACTIVE_BUTTON_COLOR, isTurn);
+        passTurnButton = new PassTurnButton(WIDTH-CARD_WIDTH -PADDING_X, HEIGHT-CARD_HEIGHT-PADDING_Y - BUTTON_WIDTH,
+                BUTTON_WIDTH,BUTTON_HEIGHT, ACTIVE_BUTTON_COLOR, DEACTIVE_BUTTON_COLOR, isTurn);
         
         btns.add(passTurnButton);
     }
     
+    @Override
     public void paint(Graphics2D g){
         boardState.paint(g);
         local.paint(g, opponent);
@@ -83,12 +78,14 @@ public class Board extends MouseAdapter{
     
     @Override
     public void mouseReleased(MouseEvent e){
-        if(dragging!= null && isTurn){
+        if(dragging!= null){
             Card card = boardState.clickedOn(e.getX(), e.getY());
-            if(card!=null){
+            if(card!=null && isTurn){
                 if(dragging instanceof GateCard && card instanceof GateCard){
-                    if(boardState.addGateCard(local.isLeft,(GateCard)dragging,(GateCard)card))
+                    if(boardState.addGateCard(local.isLeft,(GateCard)dragging,(GateCard)card)){
                         updateHand(dragging);
+                        if(((GateCard)card).boardY == boardState.input.length - 1) registerWin();
+                    }
                 }else if(!(dragging instanceof GateCard)){
                     if(card instanceof InputCard){
                         ((InputCard) card).flip();
@@ -136,10 +133,12 @@ public class Board extends MouseAdapter{
     }
     
     @Remote
-    public void sendWin(){
+    public void registerWin(){
         MAIN.com.send(EventMessage.WIN);
+        MAIN.setScreen(new EndScreen("WIN"));
     }
     
+    @Remote
     public void switchTurn(boolean turn){
         if(!turn) sendPassTurn();
         isTurn = turn;

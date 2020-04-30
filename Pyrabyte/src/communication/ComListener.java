@@ -24,6 +24,7 @@ import com.esotericsoftware.kryonet.Server;
 import gameplay.Board;
 import gameplay.BoardState;
 import gameplay.Player;
+import gui.screens.EndScreen;
 import java.io.IOException;
 
 import static gui.Window.MAIN;
@@ -49,9 +50,9 @@ public class ComListener extends Listener{
         if(ob instanceof byte[]){
             ob = fromByteArray((byte[]) ob);
             if(ob instanceof EventMessage){
-                if(ob == EventMessage.PASS)board.switchTurn(true);
-            }
-            else if(ob instanceof String) System.out.println(ob);
+                if(ob.equals(EventMessage.PASS)) board.switchTurn(true);
+                else if(ob.equals(EventMessage.WIN)) MAIN.setScreen(new EndScreen("LOSE"));
+            }else if(ob instanceof String) System.out.println(ob);
             else if(ob instanceof Player){
                 System.out.println("Recieved player");
                 if(board.opponent == null){
