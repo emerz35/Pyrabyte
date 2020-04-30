@@ -133,6 +133,7 @@ public class Board extends MouseAdapter implements Screen{
     
     @Remote
     public void registerWin(){
+        scoopCards();
         MAIN.com.send(EventMessage.WIN);
         MAIN.setScreen(new EndScreen("WIN", nGBtn));
     }
@@ -146,14 +147,17 @@ public class Board extends MouseAdapter implements Screen{
     
     @Remote
     public void newGame(){
-        boardState.scoopCards(local.isLeft, local.deck);
-        local.hand.scoopCards(local.deck);
         if(isTurn){
             boardState = new BoardState(inputNum);
-            sendAllInfo();
+            //sendAllInfo();
         }
         local.getMultipleCardsToHand(inputNum-1);
         MAIN.setScreen(this);
     }
     
+    public void scoopCards(){
+        boardState.scoopCards(local.isLeft, local.deck);
+        local.hand.scoopCards(local.deck);
+
+    }
 }

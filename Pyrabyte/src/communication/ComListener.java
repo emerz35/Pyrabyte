@@ -51,8 +51,10 @@ public class ComListener extends Listener{
             ob = fromByteArray((byte[]) ob);
             if(ob instanceof EventMessage){
                 if(ob.equals(EventMessage.PASS)) board.switchTurn(true);
-                else if(ob.equals(EventMessage.WIN)) 
-                   MAIN.setScreen(new EndScreen("LOSE", board.nGBtn));
+                else if(ob.equals(EventMessage.WIN)) {
+                    board.scoopCards();
+                    MAIN.setScreen(new EndScreen("LOSE", board.nGBtn));
+                }
                 else if(ob.equals(EventMessage.NEWGAME)){
                     if(board.nGBtn.requestSent) board.newGame();
                     else board.nGBtn.recieveRequest();
