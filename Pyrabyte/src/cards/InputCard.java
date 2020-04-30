@@ -29,6 +29,8 @@ import static gui.Main.R;
 public class InputCard extends Card{
     
     
+    private static final double SWITCH_CHANCE = 0.5;
+    
     public boolean left, right;
     
 
@@ -40,6 +42,7 @@ public class InputCard extends Card{
     
     public InputCard(int x, int y, int w, int h){
         this(x,y,w, h, R.nextDouble()<0.5, R.nextDouble()<0.5);
+        if(left==right && R.nextDouble()<SWITCH_CHANCE) left = !right;
     }
 
     
