@@ -4,13 +4,17 @@ package gui;
 import communication.ComCom;
 import gameplay.Board;
 import gameplay.Player;
+import gui.screens.Screen;
 import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
 import static communication.ComCom.createComInstance;
-import java.awt.Color;
 
 /**
  *
@@ -38,17 +42,18 @@ public class Main extends Canvas{
     private final Renderer renderer;
     public final Board boardUwu;
     public final Player localPlayer;
+   
+    protected Screen currentScreen;
     
-    public Main(String ip, int port, boolean isServer){
+    
+    public Main(String ip, int port, boolean isServer, int inputNum){
         
-        localPlayer = new Player(isServer);
+        localPlayer = new Player(isServer, inputNum);
         
-        boardUwu = new Board(4, localPlayer, isServer);
+        boardUwu = new Board(inputNum, localPlayer, isServer);
+        setScreen(boardUwu);
         
         com = createComInstance(boardUwu, isServer, port);
-        
-        this.addMouseListener(boardUwu);
-        this.addMouseMotionListener(boardUwu);
         
         renderer = new Renderer(this);
         renderThread = new Thread(renderer);
@@ -56,12 +61,24 @@ public class Main extends Canvas{
         window  = new Window("Pyrabyte", WIDTH,HEIGHT, this);
     }
     
+    
     public void start(){
         createBufferStrategy(4);
         renderThread.setDaemon(true);
         renderThread.start();
     }
     
+    public final void setScreen(Screen sc){
+        if(currentScreen instanceof MouseAdapter){
+            this.removeMouseListener((MouseListener)currentScreen);
+            this.removeMouseMotionListener((MouseMotionListener)currentScreen);
+        }
+        currentScreen = sc;
+        if(currentScreen instanceof MouseAdapter){
+            this.addMouseListener((MouseListener)currentScreen);
+            this.addMouseMotionListener((MouseMotionListener)currentScreen);
+        }
+    }
     
 
     /**
@@ -70,7 +87,7 @@ public class Main extends Canvas{
     public static void main(String[] args) {
 
         int port = 27960;
-        Main m = new Main("", port, false);
+        Main m = new Main("", port, true, 4);
 
         
         Scanner scan = new Scanner(System.in);
