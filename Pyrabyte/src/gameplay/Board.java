@@ -54,7 +54,7 @@ public class Board extends MouseAdapter implements Screen{
         
         btns.add(passTurnButton);
         
-        nGBtn = new NewGameButton((WIDTH-BUTTON_WIDTH)/2, 5*HEIGHT/6,BUTTON_WIDTH, BUTTON_HEIGHT, this);
+        nGBtn = new NewGameButton(WIDTH/2, 5*HEIGHT/6,BUTTON_WIDTH*2, BUTTON_HEIGHT*2, this);
     }
     
     @Override
@@ -149,7 +149,7 @@ public class Board extends MouseAdapter implements Screen{
     public void newGame(){
         if(isTurn){
             boardState = new BoardState(inputNum);
-            //sendAllInfo();
+            sendAllInfo();
         }
         local.getMultipleCardsToHand(inputNum-1);
         MAIN.setScreen(this);
