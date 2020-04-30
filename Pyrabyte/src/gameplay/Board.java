@@ -29,8 +29,8 @@ public class Board extends MouseAdapter{
     private Card dragging;
     
     
-    public Board(int inputNum, Player you){
-        boardState = new BoardState(inputNum);
+    public Board(int inputNum, Player you, boolean isServer){
+        if(isServer) boardState = new BoardState(inputNum);
         local = you;
     }
     
@@ -94,6 +94,11 @@ public class Board extends MouseAdapter{
     public void updateHand(Card card){
         local.hand.list.remove(card);
         System.out.println("update hand");
+        sendAllInfo();
+    }
+    
+    @Remote
+    public void sendAllInfo(){
         MAIN.com.send(boardState);
         MAIN.com.send(local);
     }

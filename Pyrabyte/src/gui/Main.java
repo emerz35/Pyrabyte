@@ -39,7 +39,7 @@ public class Main extends Canvas{
         
         localPlayer = new Player(isServer);
         
-        boardUwu = new Board(4, localPlayer);
+        boardUwu = new Board(4, localPlayer, isServer);
         
         com = createComInstance(boardUwu, isServer, port);
         
@@ -87,8 +87,8 @@ public class Main extends Canvas{
         while(true){
             mes = scan.nextLine();
             if(mes.equals("/send")){
-                System.out.println("Sending player...");
-                m.com.send(m.localPlayer);
+                System.out.println("Sending everything...");
+                m.boardUwu.sendAllInfo();
             }else m.com.send(mes);
         }
     }
