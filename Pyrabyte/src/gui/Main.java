@@ -87,7 +87,7 @@ public class Main extends Canvas{
     public static void main(String[] args) {
 
         int port = 27960;
-        Main m = new Main("", port, true, 4);
+        Main m = new Main("", port, false, 4);
 
         
         Scanner scan = new Scanner(System.in);

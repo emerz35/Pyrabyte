@@ -84,7 +84,7 @@ public class Board extends MouseAdapter implements Screen{
                 if(dragging instanceof GateCard && card instanceof GateCard){
                     if(boardState.addGateCard(local.isLeft,(GateCard)dragging,(GateCard)card)){
                         updateHand(dragging);
-                        if(((GateCard)card).boardY == boardState.input.length - 1) registerWin();
+                        if(((GateCard)card).boardY == boardState.input.length - 2) registerWin();
                     }
                 }else if(!(dragging instanceof GateCard)){
                     if(card instanceof InputCard){
