@@ -75,6 +75,8 @@ public class ComListener extends Listener{
     @Override
     public void connected(Connection ctc){
         ctc.sendTCP(toByteArray("The other player has connected!"));
+        System.out.println("Sending everything...");
+        board.sendAllInfo();
     }
 
     @Override
